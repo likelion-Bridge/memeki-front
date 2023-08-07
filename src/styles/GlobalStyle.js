@@ -1,5 +1,6 @@
 import React from 'react';
 import { Global, css } from '@emotion/react';
+import theme from './theme';
 
 const GlobalStyle = () => {
   return (
@@ -100,7 +101,7 @@ const GlobalStyle = () => {
         html {
           font-size: 62.5%;
           font-family: 'Pretendard', 'Noto Sans KR', 'sans-serif';
-          background-color: #FAF9F8;
+          background-color: ${theme.palette.background};
           height: 100vh;
           overflow: scroll;
           -ms-overflow-style: none; /* 인터넷 익스플로러 */
@@ -113,7 +114,7 @@ const GlobalStyle = () => {
             font-style: normal;
             line-height: normal;
             letter-spacing: -3%;
-            color: #000;
+            color: ${theme.palette.gray.black};
           }
         }
         ol,
