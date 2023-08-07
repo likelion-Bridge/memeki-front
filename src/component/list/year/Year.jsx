@@ -1,5 +1,7 @@
-import React from "react";
+import React from 'react';
 
-export const Year = () => {
+const Year = () => {
   return <div>Year</div>;
 };
+
+export default Year;
