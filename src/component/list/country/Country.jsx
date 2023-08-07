@@ -1,5 +1,7 @@
-import React from "react";
+import React from 'react';
 
-export const Country = () => {
+const Country = () => {
   return <div>Country</div>;
 };
+
+export default Country;
