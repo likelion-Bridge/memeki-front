@@ -79,7 +79,7 @@ export const Body2Bold = ({ children, style }) => (
     {children}
   </div>
 );
-export const Section = ({ children, gap }: { children: React.ReactNode; gap?: string }) => (
+export const Section = ({ children, gap }) => (
   <div
     css={css`
       display: flex;

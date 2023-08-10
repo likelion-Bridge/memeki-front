@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { useState } from 'react';
 
-import { css } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
 import theme from '../../styles/theme';
 
 /**
@@ -159,3 +159,262 @@ export const Header = ({ type }) => {
     </div>
   );
 };
+
+/**
+ * custom selectBox
+ * @param {string} type select목록 (date, country, year)
+ * @returns
+ */
+export const SelectBox1 = ({ type }) => {
+  const handleChange = (e) => {
+    // event handler
+    console.log(e.target.value);
+  };
+  const options = {
+    date: [
+      { value: 'week', name: '이번 주' },
+      { value: 'month', name: '이번 달' },
+      { value: 'year', name: '올해' },
+    ],
+    country: [
+      { value: 'korea', name: '국내 밈' },
+      { value: 'foreign', name: '해외 밈' },
+      { value: 'japan', name: '일본 밈' },
+    ],
+    year: [
+      { value: '1900', name: '2000년 이전' },
+      { value: '2000', name: '2000년 대' },
+      { value: '2010', name: '2010년 대' },
+      { value: '2020', name: '2020년 대' },
+    ],
+  };
+  const rotateAnimation = keyframes`
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(180deg);
+    }
+  `;
+  return (
+    <div
+      css={css`
+        position: relative;
+        width: 10.3rem;
+        height: 1.9rem;
+      `}
+    >
+      <select
+        onChange={handleChange}
+        css={css`
+          width: inherit;
+          height: inherit;
+          display: flex;
+          align-items: center;
+          gap: 1.6rem;
+          color: ${theme.palette.gray[500]};
+          ${theme.textVariants.body2Bold};
+          justify-content: flex-end;
+          appearance: none;
+          border: 0 none;
+          outline: 0 none;
+          padding: 0 0.5rem;
+          background-color: transparent;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          cursor: pointer;
+
+          &::-ms-expand {
+            display: none;
+          }
+        `}
+      >
+        {options[type].map((option) => (
+          <option
+            key={option.value}
+            value={option.value}
+            defaultValue={type.defaultValue === option.value}
+            css={css`
+              background: ${theme.palette.gray.white};
+            `}
+          >
+            {option.name}
+          </option>
+        ))}
+      </select>
+      <div
+        css={css`
+          position: absolute;
+          top: 50%;
+          right: 10px;
+          height: inherit;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transform: translateY(-50%);
+          transition: 0.3s;
+          animation: none;
+          select:focus + & {
+            animation: ${rotateAnimation} 1s linear forwards;
+          }
+        `}
+      >
+        <img
+          src={process.env.PUBLIC_URL + './images/selectIcon.png'}
+          alt="selectIcon"
+          css={css`
+            height: 1rem;
+            width: 1.5rem;
+          `}
+        />
+      </div>
+    </div>
+  );
+};
+
+/**
+ * custom selectBox
+ * z-index 손봐야 할 수도 있음
+ * @param {string} type select목록 (date, country, year)
+ */
+export const SelectBox = ({ type }) => {
+  const options = {
+    date: [
+      { value: 'week', name: '이번 주' },
+      { value: 'month', name: '이번 달' },
+      { value: 'year', name: '올해' },
+    ],
+    country: [
+      { value: 'korea', name: '국내 밈' },
+      { value: 'foreign', name: '해외 밈' },
+      { value: 'japan', name: '일본 밈' },
+    ],
+    year: [
+      { value: '1900', name: '2000년 이전' },
+      { value: '2000', name: '2000년 대' },
+      { value: '2010', name: '2010년 대' },
+      { value: '2020', name: '2020년 대' },
+    ],
+  };
+  const styles = {
+    date: css`
+      width: 10.3rem;
+    `,
+    country: css`
+      width: 10.3rem;
+    `,
+    year: css`
+      width: 13.5rem;
+    `,
+  };
+  const [rotationDegree, setRotationDegree] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(options[type][0].name);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOptionClick = (optionName) => {
+    setSelectedOption(optionName);
+    setIsOpen(false);
+  };
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+    setRotationDegree(isOpen ? 0 : 180);
+  };
+
+  return (
+    <div
+      css={css`
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 1.6rem;
+        z-index: 10;
+        ${styles[type]}
+      `}
+    >
+      <div
+        onClick={toggleDropdown}
+        css={css`
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          gap: 1.6rem;
+        `}
+      >
+        <div
+          css={css`
+            color: ${theme.palette.gray[500]};
+            ${theme.textVariants.body2Bold};
+          `}
+        >
+          {selectedOption}
+        </div>
+        <div
+          css={css`
+            transition: 0.3s;
+            animation: none;
+            transform: rotate(${rotationDegree}deg);
+          `}
+        >
+          <img
+            src={process.env.PUBLIC_URL + './images/selectIcon.png'}
+            alt="selectIcon"
+            css={css`
+              width: 1.5rem;
+              height: 1rem;
+            `}
+          />
+        </div>
+      </div>
+      {isOpen && (
+        <ul
+          css={css`
+            width: inherit;
+            border-radius: 0.5rem;
+            background: ${theme.palette.gray.white};
+            box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.05);
+          `}
+        >
+          {options[type].map((option) => (
+            <li
+              key={option.value}
+              onClick={() => handleOptionClick(option.name)}
+              css={css`
+                display: flex;
+                width: inherit;
+                padding: 1.6rem;
+                justify-content: flex-start;
+                align-items: center;
+                color: ${option.name === selectedOption
+                  ? theme.palette.primary[500]
+                  : theme.palette.gray[500]};
+                ${theme.textVariants.body2Bold}
+              `}
+            >
+              {option.name}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+/**
+ * space-between의 배치로 되어 있는 TextBox
+ * @param {ReactNode} children
+ */
+export const TextBox = ({ children }) => (
+  <div
+    css={css`
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    `}
+  >
+    {children}
+  </div>
+);
