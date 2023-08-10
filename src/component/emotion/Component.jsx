@@ -101,7 +101,7 @@ export const Header = ({ type }) => {
       `}
     >
       <img
-        src="./images/logo.png"
+        src={process.env.PUBLIC_URL + './images/logo.png'}
         alt="logo"
         css={css`
           width: 10rem;
@@ -132,7 +132,7 @@ export const Header = ({ type }) => {
           `}
         >
           <img
-            src="./images/search.png"
+            src={process.env.PUBLIC_URL + './images/search.png'}
             alt="search"
             css={css`
               width: 2rem;
@@ -156,6 +156,48 @@ export const Header = ({ type }) => {
         <li>년도별</li>
         <li>밈등록</li>
       </ul>
+    </div>
+  );
+};
+
+export const SearchBar = () => {
+  return (
+    <div
+      css={css`
+        width: 120rem;
+        display: flex;
+        align-items: center;
+        gap: 3.2rem;
+        border-radius: 0.5rem;
+        border: 0.3rem solid ${theme.palette.primary[500]};
+        justify-content: space-between;
+      `}
+    >
+      <input
+        type="text"
+        placeholder="밈을 검색해보세요."
+        css={css`
+          display: flex;
+          align-items: center;
+          width: 110.4377rem;
+          height: auto;
+          transform: rotate(-0.068deg);
+          gap: 1.6rem;
+          margin: 1rem 1.6rem;
+          background-color: transparent;
+          color: ${theme.palette.gray[400]};
+          ${theme.textVariants.body1};
+        `}
+      />
+      <img
+        src="./images/search.png"
+        alt="search"
+        css={css`
+          margin: 0.8rem 1.6rem;
+          width: 3rem;
+          height: 3rem;
+        `}
+      ></img>
     </div>
   );
 };
