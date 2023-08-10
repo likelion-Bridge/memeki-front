@@ -1,11 +1,10 @@
 import React from 'react';
-import { Inner, SelectBox, TextBox, Toast } from './emotion/Component';
-import { Header } from './emotion/Component';
+import { Header, Inner, SearchBar, SelectBox, TextBox } from './emotion/Component';
 
 export const index = () => {
   return (
     <div>
-      index <Toast />
+      main
       <Header type="search" />
       <Header type="main" />
       <SelectBox type="date" />
@@ -15,6 +14,7 @@ export const index = () => {
           <div>하이</div>
           <SelectBox type="year" />
         </TextBox>
+        <SearchBar />
       </Inner>
     </div>
   );

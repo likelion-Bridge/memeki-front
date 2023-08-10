@@ -1,44 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState } from 'react';
 
-import { css, keyframes } from '@emotion/react';
+import { css } from '@emotion/react';
 import theme from '../../styles/theme';
-
-/**
- * 주석 예시) '클럽 마스터 이메일 보기' 버튼을 눌렀을 때 뜨게 되는 컴포넌트
- * 컴포넌트 만드는 예시
- * 이런 식으로 컴포넌트 만들어주길 바람
- */
-export const Toast = () => {
-  return (
-    <div
-      css={css`
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 100;
-        align-items: center;
-        justify-content: center;
-        padding: 3.3rem 8.7rem;
-        overflow: auto;
-        border-radius: 1.2rem;
-        background: ${theme.palette.gray.white};
-        box-shadow: 6px 7px 9px 5px rgba(0, 0, 0, 0.25);
-      `}
-    >
-      <p
-        css={css`
-          display: block;
-          font-size: ${theme.textVariants.heading5};
-          color: ${theme.palette.gray[800]};
-        `}
-      >
-        해당 클럽 마스터의 이메일이 클립보드에 복사되었어요
-      </p>
-    </div>
-  );
-};
 
 /**
  * 1200px의 Inner 컴포넌트, 가운데 정렬 처리 됨
@@ -160,115 +124,44 @@ export const Header = ({ type }) => {
   );
 };
 
-/**
- * custom selectBox
- * @param {string} type select목록 (date, country, year)
- * @returns
- */
-export const SelectBox1 = ({ type }) => {
-  const handleChange = (e) => {
-    // event handler
-    console.log(e.target.value);
-  };
-  const options = {
-    date: [
-      { value: 'week', name: '이번 주' },
-      { value: 'month', name: '이번 달' },
-      { value: 'year', name: '올해' },
-    ],
-    country: [
-      { value: 'korea', name: '국내 밈' },
-      { value: 'foreign', name: '해외 밈' },
-      { value: 'japan', name: '일본 밈' },
-    ],
-    year: [
-      { value: '1900', name: '2000년 이전' },
-      { value: '2000', name: '2000년 대' },
-      { value: '2010', name: '2010년 대' },
-      { value: '2020', name: '2020년 대' },
-    ],
-  };
-  const rotateAnimation = keyframes`
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(180deg);
-    }
-  `;
+export const SearchBar = () => {
   return (
     <div
       css={css`
-        position: relative;
-        width: 10.3rem;
-        height: 1.9rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 3.2rem;
+        border-radius: 0.5rem;
+        border: 0.3rem solid ${theme.palette.primary[500]};
+        justify-content: space-between;
       `}
     >
-      <select
-        onChange={handleChange}
+      <input
+        type="text"
+        placeholder="밈을 검색해보세요."
         css={css`
-          width: inherit;
-          height: inherit;
           display: flex;
           align-items: center;
+          width: 110.4377rem;
+          height: auto;
+          transform: rotate(-0.068deg);
           gap: 1.6rem;
-          color: ${theme.palette.gray[500]};
-          ${theme.textVariants.body2Bold};
-          justify-content: flex-end;
-          appearance: none;
-          border: 0 none;
-          outline: 0 none;
-          padding: 0 0.5rem;
+          margin: 1rem 1.6rem;
           background-color: transparent;
-          -webkit-appearance: none;
-          -moz-appearance: none;
-          appearance: none;
-          cursor: pointer;
-
-          &::-ms-expand {
-            display: none;
-          }
+          color: ${theme.palette.gray[400]};
+          ${theme.textVariants.body1};
         `}
-      >
-        {options[type].map((option) => (
-          <option
-            key={option.value}
-            value={option.value}
-            defaultValue={type.defaultValue === option.value}
-            css={css`
-              background: ${theme.palette.gray.white};
-            `}
-          >
-            {option.name}
-          </option>
-        ))}
-      </select>
-      <div
+      />
+      <img
+        src="./images/search.png"
+        alt="search"
         css={css`
-          position: absolute;
-          top: 50%;
-          right: 10px;
-          height: inherit;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          transform: translateY(-50%);
-          transition: 0.3s;
-          animation: none;
-          select:focus + & {
-            animation: ${rotateAnimation} 1s linear forwards;
-          }
+          margin: 0.8rem 1.6rem;
+          width: 3rem;
+          height: 3rem;
         `}
-      >
-        <img
-          src={process.env.PUBLIC_URL + './images/selectIcon.png'}
-          alt="selectIcon"
-          css={css`
-            height: 1rem;
-            width: 1.5rem;
-          `}
-        />
-      </div>
+      ></img>
     </div>
   );
 };
