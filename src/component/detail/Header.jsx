@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.css';
 
-export const Header = () => {
+export const Header1 = () => {
   return (
     <div className="header">
       <div className="logo">
