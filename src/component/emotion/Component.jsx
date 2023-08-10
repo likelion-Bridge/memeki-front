@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState } from 'react';
 
-import { css, keyframes } from '@emotion/react';
+import { css } from '@emotion/react';
 import theme from '../../styles/theme';
 
 /**
@@ -128,7 +128,7 @@ export const SearchBar = () => {
   return (
     <div
       css={css`
-        width: 120rem;
+        width: 100%;
         display: flex;
         align-items: center;
         gap: 3.2rem;
