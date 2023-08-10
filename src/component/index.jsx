@@ -1,15 +1,21 @@
 import React from 'react';
-import { Toast } from './emotion/Component';
-import { Header1 } from './detail/Header';
+import { Inner, SelectBox, TextBox } from './emotion/Component';
 import { Header } from './emotion/Component';
 
 export const index = () => {
   return (
     <div>
-      index <Toast />
-      <Header1 />
+      index
       <Header type="search" />
       <Header type="main" />
+      <SelectBox type="date" />
+      <SelectBox type="country" />
+      <Inner>
+        <TextBox>
+          <div>하이</div>
+          <SelectBox type="year" />
+        </TextBox>
+      </Inner>
     </div>
   );
 };
