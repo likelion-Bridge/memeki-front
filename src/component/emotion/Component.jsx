@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState } from 'react';
-
 import { css } from '@emotion/react';
 import theme from '../../styles/theme';
 
@@ -311,3 +310,87 @@ export const TextBox = ({ children }) => (
     {children}
   </div>
 );
+
+export const MemeInfoBox = () => {
+  const [title, setTitle] = useState('제목');
+  const [date, setDate] = useState('날짜');
+  const [comment, setComment] = useState('댓글');
+  const [like, setLike] = useState('좋아요');
+
+  return (
+    <div>
+      <div
+        className="container"
+        css={css`
+          width: 38.4rem;
+          height: 39.5rem;
+          border-radius: 1.9rem;
+          background-color: ${theme.palette.primary[500]};
+          padding: 1.6rem;
+        `}
+      >
+        <div
+          className="imgbox"
+          css={css`
+            width: 35.2rem;
+            height: 22.4rem;
+            border-radius: 1.9rem;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          `}
+        >
+          <img
+            src="./images/logo.png"
+            alt="search"
+            css={css`
+              margin: 0.8rem 1.6rem;
+              width: 10rem;
+              height: 3rem;
+            `}
+          ></img>
+        </div>
+        <div
+          className="textbox"
+          css={css`
+            margin-top: 3.2rem;
+            color: ${theme.palette.gray[500]};
+            ${theme.textVariants.header2};
+          `}
+        >
+          {title}
+        </div>
+        <div
+          css={css`
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4.8rem;
+            color: ${theme.palette.gray[500]};
+            ${theme.textVariants.body2};
+          `}
+        >
+          <div
+            css={css`
+              color: ${theme.palette.gray[500]};
+              ${theme.textVariants.body2};
+            `}
+          >
+            {date}
+          </div>
+          <div
+            css={css`
+              display: flex;
+              gap: 1.6rem;
+              color: ${theme.palette.gray[500]};
+              ${theme.textVariants.body2};
+            `}
+          >
+            <div>{comment}</div>
+            <div>{like}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

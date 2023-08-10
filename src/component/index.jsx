@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Inner, SearchBar, SelectBox, TextBox } from './emotion/Component';
+import { Header, Inner, SearchBar, SelectBox, TextBox, MemeInfoBox } from './emotion/Component';
 
 export const index = () => {
   return (
@@ -16,6 +16,7 @@ export const index = () => {
         </TextBox>
         <SearchBar />
       </Inner>
+      <MemeInfoBox />
     </div>
   );
 };
