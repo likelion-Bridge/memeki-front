@@ -101,7 +101,7 @@ export const Header = ({ type }) => {
       `}
     >
       <img
-        src="./images/logo.png"
+        src={process.env.PUBLIC_URL + './images/logo.png'}
         alt="logo"
         css={css`
           width: 10rem;
@@ -132,7 +132,7 @@ export const Header = ({ type }) => {
           `}
         >
           <img
-            src="./images/search.png"
+            src={process.env.PUBLIC_URL + './images/search.png'}
             alt="search"
             css={css`
               width: 2rem;
