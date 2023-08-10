@@ -39,3 +39,123 @@ export const Toast = () => {
     </div>
   );
 };
+
+/**
+ * 1200px의 Inner 컴포넌트, 가운데 정렬 처리 됨
+ * @param children 컴포넌트 안에 넣을 자식 요소
+ */
+export const Inner = ({ children }) => (
+  <section
+    css={css`
+      width: 120rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      /* gap: 9.6rem; */
+    `}
+  >
+    {children}
+  </section>
+);
+
+/**
+ * 미미키의 헤더 메뉴바 컴포넌트
+ * @param {string} type 헤더의 형태(main, search)
+ */
+export const Header = ({ type }) => {
+  const styles = {
+    main: {
+      searchBar: css`
+        display: none;
+      `,
+      category: css`
+        width: 37.9rem;
+        gap: 7.2rem;
+      `,
+    },
+    search: {
+      searchBar: css`
+        display: flex;
+        align-items: center;
+        width: 59.5rem;
+        border-radius: 0.5rem;
+        border: 0.3rem solid ${theme.palette.primary[500]};
+      `,
+      category: css`
+        width: 28.4rem;
+        gap: 4rem;
+      `,
+    },
+  };
+  return (
+    <div
+      css={css`
+        margin: 0 auto;
+        width: 120rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        padding: 2.4rem 0;
+      `}
+    >
+      <img
+        src="./images/logo.png"
+        alt="logo"
+        css={css`
+          width: 10rem;
+          height: 3rem;
+        `}
+      ></img>
+      <div
+        css={css`
+          ${styles[type].searchBar}
+        `}
+      >
+        <input
+          type="text"
+          placeholder="밈을 검색해보세요"
+          css={css`
+            color: ${theme.palette.gray[400]};
+            ${theme.textVariants.body2}
+            flex: 1 0 0;
+            padding: 1rem 0 1rem 1.6rem;
+            background-color: transparent;
+          `}
+        />
+        <div
+          css={css`
+            display: flex;
+            padding: 0.8rem 1.6rem;
+            justify-content: center;
+          `}
+        >
+          <img
+            src="./images/search.png"
+            alt="search"
+            css={css`
+              width: 2rem;
+              height: 2rem;
+            `}
+          ></img>
+        </div>
+      </div>
+      <ul
+        css={css`
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          color: ${theme.palette.primary[500]};
+          ${theme.textVariants.body1};
+          ${styles[type].category};
+        `}
+      >
+        <li>홈</li>
+        <li>국가별</li>
+        <li>년도별</li>
+        <li>밈등록</li>
+      </ul>
+    </div>
+  );
+};
