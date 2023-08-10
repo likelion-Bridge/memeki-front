@@ -1,15 +1,22 @@
 import React from 'react';
-import { Toast } from './emotion/Component';
-import { Header } from './emotion/Component';
-import { MemeInfoBox } from './emotion/Component';
+import { Header, Inner, SearchBar, SelectBox, TextBox, MemeInfoBox } from './emotion/Component';
 
 export const index = () => {
   return (
     <div>
-      index <Toast />
+      main
       <Header type="search" />
       <Header type="main" />
-      <MemeInfoBox></MemeInfoBox>
+      <SelectBox type="date" />
+      <SelectBox type="country" />
+      <Inner>
+        <TextBox>
+          <div>하이</div>
+          <SelectBox type="year" />
+        </TextBox>
+        <SearchBar />
+      </Inner>
+      <MemeInfoBox />
     </div>
   );
 };
