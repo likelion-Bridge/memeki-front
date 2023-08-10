@@ -1,5 +1,5 @@
 import React from 'react';
-import { Toast } from './emotion/Component';
+import { Inner, SelectBox, TextBox, Toast } from './emotion/Component';
 import { Header } from './emotion/Component';
 
 export const index = () => {
@@ -8,6 +8,14 @@ export const index = () => {
       index <Toast />
       <Header type="search" />
       <Header type="main" />
+      <SelectBox type="date" />
+      <SelectBox type="country" />
+      <Inner>
+        <TextBox>
+          <div>하이</div>
+          <SelectBox type="year" />
+        </TextBox>
+      </Inner>
     </div>
   );
 };
