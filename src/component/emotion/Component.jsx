@@ -284,3 +284,92 @@ export const MemeInfoBox = () => {
     </div>
   );
 };
+
+export const UploadMeme = () => {
+  return (
+    <div
+      css={css`
+        width: 112rem;
+        height: 71.7rem;
+      `}
+    >
+      <div className="div"></div>
+      <div
+        className="image"
+        css={css`
+          display: flex;
+          justify-content: right;
+          padding: 0rem 0.8rem;
+          align-items: flex-start;
+          gap: 1.6rem;
+        `}
+      >
+        <img
+          src="./images/gallery.png"
+          alt="search"
+          css={css`
+            width: 3.5rem;
+            height: 3.5rem;
+          `}
+        ></img>
+        <img
+          src="./images/video.png"
+          alt="search"
+          css={css`
+            width: 3.5rem;
+            height: 3.5rem;
+          `}
+        ></img>
+      </div>
+      <div
+        css={css`
+          width: 112rem;
+          height: 68.2rem;
+          border-radius: 1rem;
+          border: 0.2rem solid ${theme.palette.primary[500]};
+          background-color: white;
+        `}
+      >
+        <div
+          css={css`
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            height: 8rem;
+            position: relative; /* 부모 요소에 상대 위치 설정 */
+          `}
+        >
+          <div
+            css={css`
+              width: 94%; /* 가상 요소의 너비를 100%로 설정 */
+              position: absolute; /* 절대 위치 설정 */
+              bottom: 0; /* 아래쪽으로 위치 */
+              left: 0; /* 왼쪽으로 위치 */
+              border-bottom: solid 0.1rem ${theme.palette.primary[500]};
+              margin: 0 3rem; /* 양 옆 간격 조절 */
+            `}
+          />
+          <input
+            type="text"
+            placeholder='소제목을 입력하세요 (목차번호 예시. "1", or "1.1.")'
+            css={css`
+              margin: 3.2rem;
+              width: 37.2rem;
+              height: 2.2rem;
+            `}
+          />
+        </div>
+
+        <input
+          type="text"
+          placeholder="내용을 입력하세요"
+          css={css`
+            margin: 3.2rem;
+            width: auto;
+            height: auto;
+          `}
+        />
+      </div>
+    </div>
+  );
+};
