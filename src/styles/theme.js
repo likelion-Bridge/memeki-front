@@ -1,12 +1,12 @@
 const theme = {
   textVariants: {
     title: { fontSize: '4rem', fontWeight: '800' },
-    heading1: { fontSize: '3.2rem', fontWeight: '700' },
-    heading2: { fontSize: '2.4rem', fontWeight: '700' },
+    header1: { fontSize: '3.2rem', fontWeight: '700' },
+    header2: { fontSize: '2.4rem', fontWeight: '700' },
     body1: { fontSize: '1.8rem', fontWeight: '500' },
-    body1_bold: { fontSize: '1.8rem', fontWeight: '700' },
+    body1Bold: { fontSize: '1.8rem', fontWeight: '700' },
     body2: { fontSize: '1.6rem', fontWeight: '500' },
-    body2_bold: { fontSize: '1.6rem', fontWeight: '700' },
+    body2Bold: { fontSize: '1.6rem', fontWeight: '700' },
   },
   palette: {
     background: '#FAF9F8',
