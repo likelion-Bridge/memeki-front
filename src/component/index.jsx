@@ -1,16 +1,14 @@
 import React from 'react';
-import { MyEditor, Toast, UploadMeme } from './emotion/Component';
-import { Header } from './emotion/Component';
-import { MemeInfoBox } from './emotion/Component';
+import { MemeInfoBox, Header, UploadMeme } from './emotion/Component';
 
 export const index = () => {
   return (
     <div>
       <Header type="search" />
       <Header type="main" />
-      <MemeInfoBox></MemeInfoBox>
-      <UploadMeme></UploadMeme>
-      <UploadMeme type="sub"></UploadMeme>
+      <MemeInfoBox />
+      <UploadMeme />
+      <UploadMeme type={'sub'} />
     </div>
   );
 };

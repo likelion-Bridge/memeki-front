@@ -476,7 +476,7 @@ export const UploadMeme = ({ type }) => {
     );
 };
 
-export const MyEditor = () => {
+const MyEditor = () => {
   const [editorHtml, setEditorHtml] = useState('');
 
   const modules = {
@@ -511,14 +511,6 @@ export const MyEditor = () => {
     if (url) {
       const range = this.quill.getEditor().getSelection();
       this.quill.getEditor().insertEmbed(range.index, 'image', url, 'user');
-    }
-  };
-
-  const insertVideo = () => {
-    const url = prompt('Enter the video URL:');
-    if (url) {
-      const range = this.quill.getEditor().getSelection();
-      this.quill.getEditor().insertEmbed(range.index, 'video', url, 'user');
     }
   };
 
