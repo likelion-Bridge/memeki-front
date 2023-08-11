@@ -1,6 +1,13 @@
 import React from 'react';
-import { Header, Inner, SearchBar, SelectBox, TextBox, MemeInfoBox } from './emotion/Component';
-
+import {
+  Header,
+  Inner,
+  SearchBar,
+  SelectBox,
+  TextBox,
+  MemeInfoBox,
+  UploadMeme,
+} from './emotion/Component';
 export const index = () => {
   return (
     <div>
@@ -17,6 +24,8 @@ export const index = () => {
         <SearchBar />
       </Inner>
       <MemeInfoBox />
+      <UploadMeme />
+      <UploadMeme type={'sub'} />
     </div>
   );
 };
