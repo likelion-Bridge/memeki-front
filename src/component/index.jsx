@@ -1,5 +1,5 @@
 import React from 'react';
-import { Toast, UploadMeme } from './emotion/Component';
+import { MyEditor, Toast, UploadMeme } from './emotion/Component';
 import { Header } from './emotion/Component';
 import { MemeInfoBox } from './emotion/Component';
 
@@ -10,6 +10,7 @@ export const index = () => {
       <Header type="main" />
       <MemeInfoBox></MemeInfoBox>
       <UploadMeme></UploadMeme>
+      <UploadMeme type="sub"></UploadMeme>
     </div>
   );
 };
