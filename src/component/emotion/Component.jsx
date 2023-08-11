@@ -288,6 +288,11 @@ export const MemeInfoBox = () => {
 };
 
 export const UploadMeme = ({ type }) => {
+  const [isVisible, setIsVisible] = useState(true);
+
+  const handleClick = () => {
+    setIsVisible(false);
+  };
   const [displayText, setDisplayText] = useState('네');
 
   const handleToggle = () => {
@@ -338,30 +343,33 @@ export const UploadMeme = ({ type }) => {
             background-color: white;
           `}
         >
-          <a
-            href="#" // 링크 주소를 지정해주세요
-            css={css`
-              z-index: 100;
-              display: flex;
-              width: 111.6rem;
-              height: 67.8rem;
-              position: absolute;
-              background-color: rgba(240, 240, 239, 0.6);
-              align-items: center;
-              justify-content: center;
-              color: #6b6b6a;
-              font-size: 3.2rem;
-              font-weight: 700;
-              font-family: Inter;
-              letter-spacing: -0.96px;
-              text-decoration-line: underline;
-              &:hover {
-                text-decoration: underline; // 마우스를 올렸을 때도 밑줄 유지
-              }
-            `}
-          >
-            단락 추가
-          </a>
+          {isVisible && (
+            <div
+              css={css`
+                z-index: 100;
+                display: flex;
+                width: 111.6rem;
+                height: 67.8rem;
+                position: absolute;
+                background-color: rgba(240, 240, 239, 0.6);
+                align-items: center;
+                justify-content: center;
+                color: #6b6b6a;
+                font-size: 3.2rem;
+                font-weight: 700;
+                font-family: Inter;
+                letter-spacing: -0.96px;
+                text-decoration-line: underline;
+                &:hover {
+                  cursor: pointer; /* 마우스를 올렸을 때 커서 모양 변경 */
+                  text-decoration: underline; // 마우스를 올렸을 때도 밑줄 유지
+                }
+              `}
+              onClick={handleClick}
+            >
+              단락 추가
+            </div>
+          )}
           <div
             css={css`
               justify-content: center;
@@ -473,11 +481,7 @@ export const MyEditor = () => {
 
   const modules = {
     toolbar: {
-      container: [
-        ['underline', 'strike', 'blockquote'],
-
-        ['link', 'image', 'video'],
-      ],
+      container: [['underline', 'strike', 'blockquote'], ['image']],
     },
   };
 
@@ -519,7 +523,11 @@ export const MyEditor = () => {
   };
 
   return (
-    <div css={css``}>
+    <div
+      css={css`
+        color: black;
+      `}
+    >
       <ReactQuill
         value={editorHtml}
         onChange={handleEditorChange}
