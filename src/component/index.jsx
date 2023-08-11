@@ -1,7 +1,7 @@
 import React from 'react';
-import { MyEditor, Toast, UploadMeme } from './emotion/Component';
 import { Header } from './emotion/Component';
 import { MemeInfoBox } from './emotion/Component';
+import { Button } from './emotion/Component';
 
 export const index = () => {
   return (
@@ -9,8 +9,8 @@ export const index = () => {
       <Header type="search" />
       <Header type="main" />
       <MemeInfoBox></MemeInfoBox>
-      <UploadMeme></UploadMeme>
-      <UploadMeme type="sub"></UploadMeme>
+      <Button type="new"></Button>
+      <Button></Button>
     </div>
   );
 };
