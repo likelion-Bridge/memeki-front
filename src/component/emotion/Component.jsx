@@ -66,7 +66,7 @@ export const Header = ({ type }) => {
       `}
     >
       <img
-        src={process.env.PUBLIC_URL + './images/logo.png'}
+        src={process.env.PUBLIC_URL + '/images/logo.png'}
         alt="logo"
         css={css`
           width: 10rem;
@@ -97,7 +97,7 @@ export const Header = ({ type }) => {
           `}
         >
           <img
-            src={process.env.PUBLIC_URL + './images/search.png'}
+            src={process.env.PUBLIC_URL + '/images/search.png'}
             alt="search"
             css={css`
               width: 2rem;
@@ -155,7 +155,7 @@ export const SearchBar = () => {
         `}
       />
       <img
-        src="./images/search.png"
+        src={process.env.PUBLIC_URL + '/images/search.png'}
         alt="search"
         css={css`
           margin: 0.8rem 1.6rem;
@@ -253,7 +253,7 @@ export const SelectBox = ({ type }) => {
           `}
         >
           <img
-            src={process.env.PUBLIC_URL + './images/selectIcon.png'}
+            src={process.env.PUBLIC_URL + '/images/selectIcon.png'}
             alt="selectIcon"
             css={css`
               width: 1.5rem;
@@ -300,13 +300,13 @@ export const SelectBox = ({ type }) => {
  * space-between의 배치로 되어 있는 TextBox
  * @param {ReactNode} children
  */
-export const TextBox = ({ children }) => (
+export const TextBox = ({ children, style }) => (
   <div
     css={css`
       width: 100%;
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      ${style}
     `}
   >
     {children}
@@ -344,7 +344,7 @@ export const MemeInfoBox = () => {
           `}
         >
           <img
-            src="./images/logo.png"
+            src={process.env.PUBLIC_URL + '/images/logo.png'}
             alt="search"
             css={css`
               margin: 0.8rem 1.6rem;

@@ -6,7 +6,7 @@ import theme from '../../styles/theme';
 export const Title = ({ children, style }) => (
   <div
     css={css`
-      ${theme.typography.title};
+      ${theme.textVariants.title};
       ${style};
     `}
   >
@@ -17,7 +17,7 @@ export const Title = ({ children, style }) => (
 export const Header1 = ({ children, style }) => (
   <div
     css={css`
-      ${theme.typography.header1};
+      ${theme.textVariants.header1};
       ${style};
     `}
   >
@@ -28,7 +28,7 @@ export const Header1 = ({ children, style }) => (
 export const Header2 = ({ children, style }) => (
   <div
     css={css`
-      ${theme.typography.header2};
+      ${theme.textVariants.header2};
       ${style};
     `}
   >
@@ -39,7 +39,7 @@ export const Header2 = ({ children, style }) => (
 export const Body1 = ({ children, style }) => (
   <div
     css={css`
-      ${theme.typography.body1};
+      ${theme.textVariants.body1};
       ${style};
     `}
   >
@@ -50,7 +50,7 @@ export const Body1 = ({ children, style }) => (
 export const Body1Bold = ({ children, style }) => (
   <div
     css={css`
-      ${theme.typography.body1Bold};
+      ${theme.textVariants.body1Bold};
       ${style};
     `}
   >
@@ -61,7 +61,7 @@ export const Body1Bold = ({ children, style }) => (
 export const Body2 = ({ children, style }) => (
   <div
     css={css`
-      ${theme.typography.body2};
+      ${theme.textVariants.body2};
       ${style};
     `}
   >
@@ -72,7 +72,7 @@ export const Body2 = ({ children, style }) => (
 export const Body2Bold = ({ children, style }) => (
   <div
     css={css`
-      ${theme.typography.body2Bold};
+      ${theme.textVariants.body2Bold};
       ${style};
     `}
   >
