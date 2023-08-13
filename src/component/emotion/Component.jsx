@@ -4,12 +4,13 @@ import ReactQuill from 'react-quill';
 import { css } from '@emotion/react';
 import './quill.snow.css';
 import theme from '../../styles/theme';
+import { Header1 } from './FontComponent';
 
 /**
  * 1200px의 Inner 컴포넌트, 가운데 정렬 처리 됨
  * @param children 컴포넌트 안에 넣을 자식 요소
  */
-export const Inner = ({ children }) => (
+export const Inner = ({ children, style }) => (
   <section
     css={css`
       width: 120rem;
@@ -17,7 +18,10 @@ export const Inner = ({ children }) => (
       display: flex;
       flex-direction: column;
       align-items: start;
-      /* gap: 9.6rem; */
+      gap: 9.6rem;
+      // 추후 수정
+      padding-bottom: 9.6rem;
+      ${style};
     `}
   >
     {children}
@@ -57,7 +61,7 @@ export const Header = ({ type }) => {
     <div
       css={css`
         margin: 0 auto;
-        width: 120rem;
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -125,6 +129,7 @@ export const Header = ({ type }) => {
   );
 };
 
+// 검색 바 컴포넌트
 export const SearchBar = () => {
   return (
     <div
@@ -313,6 +318,7 @@ export const TextBox = ({ children, style }) => (
   </div>
 );
 
+// 썸네일이 보여지는 밈 문서
 export const MemeInfoBox = () => {
   const [title, setTitle] = useState('제목');
   const [date, setDate] = useState('날짜');
@@ -324,7 +330,7 @@ export const MemeInfoBox = () => {
       <div
         className="container"
         css={css`
-          width: 38.4rem;
+          width: 37.6rem;
           height: 39.5rem;
           border-radius: 1.9rem;
           background-color: ${theme.palette.primary[500]};
@@ -334,7 +340,6 @@ export const MemeInfoBox = () => {
         <div
           className="imgbox"
           css={css`
-            width: 35.2rem;
             height: 22.4rem;
             border-radius: 1.9rem;
             background-color: #ffffff;
@@ -397,6 +402,7 @@ export const MemeInfoBox = () => {
   );
 };
 
+// 밈을 등록할 수 있는 input 컴포넌트
 export const UploadMeme = ({ type }) => {
   const [isVisible, setIsVisible] = useState(true);
 
@@ -586,6 +592,7 @@ export const UploadMeme = ({ type }) => {
     );
 };
 
+// UploadMeme에 들어가는 라이브러리를 이용한 에디터 컴포넌트
 const MyEditor = () => {
   const [editorHtml, setEditorHtml] = useState('');
 
@@ -637,6 +644,68 @@ const MyEditor = () => {
         formats={formats}
         placeholder="내용을 입력하세요" // 텍스트 홀더 추가
       />
+    </div>
+  );
+};
+
+/**
+ * 이미지 + 카테고리 이름이 보여지는 컴포넌트
+ * @param {string} type 카테고리별 타입(new, newCheck, popular, popularCheck, country, year)
+ */
+export const Category = ({ type }) => {
+  const img = {
+    new: { src: '/images/mdi_new-box.png', name: '최신' },
+    newCheck: { src: '/images/mdi_new-box-check.png', name: '최신' },
+    popular: { src: '/images/iconamoon_trend-up-bold.png', name: '인기' },
+    popularCheck: { src: '/images/iconamoon_trend-up-bold-check.png', name: '인기' },
+    country: { src: '/images/ant-design_global-outlined.png', name: '국가별' },
+    year: { src: '/images/fluent-mdl2_calendar-year.png', name: '년도별' },
+  };
+  const styles = {
+    new: css`
+      cursor: pointer;
+    `,
+    newCheck: css`
+      cursor: pointer;
+      color: ${theme.palette.primary[500]};
+    `,
+    popular: css`
+      cursor: pointer;
+    `,
+    popularCheck: css`
+      cursor: pointer;
+      color: ${theme.palette.primary[500]};
+    `,
+  };
+  return (
+    <div
+      css={css`
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        ${styles[type]}
+      `}
+    >
+      <img src={process.env.PUBLIC_URL + img[type].src} alt={type} />
+      {img[type].name}
+    </div>
+  );
+};
+
+/**
+ * MemeInfoBox의 프레임
+ */
+export const MemeInfoBoxList = ({ children }) => {
+  return (
+    <div
+      css={css`
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 2.4rem;
+        column-gap: 3.6rem;
+      `}
+    >
+      {children}
     </div>
   );
 };

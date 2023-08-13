@@ -79,12 +79,14 @@ export const Body2Bold = ({ children, style }) => (
     {children}
   </div>
 );
-export const Section = ({ children, gap }) => (
+export const Section = ({ children, gap, style }) => (
   <div
     css={css`
       display: flex;
       flex-direction: column;
+      width: inherit;
       gap: ${gap}rem;
+      ${style}
     `}
   >
     {children}
