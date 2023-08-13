@@ -5,10 +5,6 @@ import { css } from '@emotion/react';
 import './quill.snow.css';
 import theme from '../../styles/theme';
 
-export const Component = () => {
-  return <div>Component</div>;
-};
-
 export const UploadMeme = ({ type }) => {
   const [isVisible, setIsVisible] = useState(true);
 
