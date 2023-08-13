@@ -114,7 +114,7 @@ const GlobalStyle = () => {
             font-style: normal;
             line-height: normal;
             letter-spacing: -3%;
-            color: ${theme.palette.gray.black};
+            color: ${theme.palette.gray[500]};
           }
         }
         ol,

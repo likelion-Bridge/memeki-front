@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { Children } from 'react';
 import { css } from '@emotion/react';
 import { Body1, Body1Bold, Header1, Title } from '../emotion/FontComponent';
 import theme from '../../styles/theme';
@@ -92,6 +92,25 @@ export const DocumentSection = ({ subTitle, context }) => {
         <Header1>{subTitle}</Header1>
       </div>
       <Body1>{context}</Body1>
+    </div>
+  );
+};
+
+export const DocumentWrapper = ({ children }) => {
+  return (
+    <div
+      css={css`
+        width: 100%;
+        height: auto;
+        border-radius: 1.6rem;
+        background-color: ${theme.palette.gray.white};
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4rem;
+      `}
+    >
+      {children}
     </div>
   );
 };
