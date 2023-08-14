@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 import { css } from '@emotion/react';
 import theme from '../../styles/theme';
 import { Header1 } from './FontComponent';
+import { Link } from 'react-router-dom';
 
 /**
  * 1200px의 Inner 컴포넌트, 가운데 정렬 처리 됨
@@ -120,7 +121,9 @@ export const Header = ({ type }) => {
       >
         <li>홈</li>
         <li>년도별</li>
-        <li>밈등록</li>
+        <Link to="/upload">
+          <li>밈등록</li>
+        </Link>
       </ul>
     </div>
   );
@@ -152,7 +155,7 @@ export const SearchBar = () => {
           gap: 1.6rem;
           margin: 1rem 1.6rem;
           background-color: transparent;
-          color: ${theme.palette.gray[400]};
+          color: ${theme.palette.gray[600]};
           ${theme.textVariants.body1};
         `}
       />
