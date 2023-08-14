@@ -119,7 +119,6 @@ export const Header = ({ type }) => {
         `}
       >
         <li>홈</li>
-        <li>국가별</li>
         <li>년도별</li>
         <li>밈등록</li>
       </ul>

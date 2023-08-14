@@ -73,7 +73,7 @@ export const UploadMeme = ({ type }) => {
                 align-items: center;
                 justify-content: center;
                 color: ${theme.palette.gray[400]};
-                ${theme.textVariants.heading1}
+                ${theme.textVariants.header1};
                 text-decoration-line: underline;
                 &:hover {
                   cursor: pointer; /* 마우스를 올렸을 때 커서 모양 변경 */
@@ -251,5 +251,25 @@ export const MyEditor = () => {
         placeholder="내용을 입력하세요" // 텍스트 홀더 추가
       />
     </div>
+  );
+};
+
+export const MemeTitle = () => {
+  return (
+    <input
+      type="text"
+      placeholder="밈의 이름을 정의해주세요"
+      css={css`
+        width: 112rem;
+        height: 8rem;
+        border-radius: 1rem;
+        align-items: center;
+        display: flex;
+        border: 0.2rem solid ${theme.palette.primary[500]};
+        ${theme.textVariants.body1}
+        color: ${theme.palette.gray[400]};
+        padding: 1.6rem 3.2rem;
+      `}
+    />
   );
 };
