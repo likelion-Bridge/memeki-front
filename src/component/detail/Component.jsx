@@ -5,6 +5,7 @@ import { Body1, Body1Bold, Header1, Title } from '../emotion/FontComponent';
 import theme from '../../styles/theme';
 import { TextBox } from '../emotion/Component';
 
+// 제목을 보여주는 컴포넌트
 export const DocumentTitle = ({ title }) => {
   return (
     <TextBox
@@ -25,6 +26,22 @@ export const DocumentTitle = ({ title }) => {
   );
 };
 
+// 날짜, 댓글, 조회수를 나타내는 컴포넌트
+export const DocumentInfo = ({ comment, view }) => {
+  return (
+    <Body1
+      style={css`
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+      `}
+    >
+      댓글 {comment} 조회수 {view}
+    </Body1>
+  );
+};
+
+// 목차를 보여주는 컴포넌트
 export const DocumentIndex = () => {
   const contextDummy =
     '1. 개요\n2. 영상\n3. 가사\n4. 대한민국에서의 화제\n    4.1. 이다현의 춤\n    4.2. 싸이의 춤';
@@ -64,6 +81,7 @@ export const DocumentIndex = () => {
   );
 };
 
+// 소제목을 나눠주는 컴포넌트
 export const DocumentSection = ({ subTitle, context }) => {
   return (
     <div
@@ -96,6 +114,7 @@ export const DocumentSection = ({ subTitle, context }) => {
   );
 };
 
+// 흰색 컴포넌트
 export const DocumentWrapper = ({ children }) => {
   return (
     <div
@@ -103,13 +122,44 @@ export const DocumentWrapper = ({ children }) => {
         width: 100%;
         height: auto;
         border-radius: 1.6rem;
+        padding: 8rem 4rem;
         background-color: ${theme.palette.gray.white};
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 4rem;
+        gap: 8rem;
       `}
     >
+      {children}
+    </div>
+  );
+};
+
+// 댓글 컴포넌트
+export const CommentBox = ({ comment, children }) => {
+  return (
+    <div>
+      <div
+        css={css`
+          display: flex;
+          flex-direction: column;
+          gap: 0.8rem;
+          padding-bottom: 1.6rem;
+          border-bottom: 1px solid ${theme.palette.gray[300]};
+          margin-bottom: 1.6rem;
+        `}
+      >
+        <Header1>
+          댓글{' '}
+          <span
+            css={css`
+              color: ${theme.palette.primary[500]};
+            `}
+          >
+            {comment}
+          </span>
+        </Header1>
+      </div>
       {children}
     </div>
   );
@@ -327,7 +377,7 @@ export const Comment = ({ type }) => {
   );
 };
 
-export const CommentBox = () => {
+export const CommentInput = () => {
   return (
     <div
       css={css`
@@ -339,8 +389,8 @@ export const CommentBox = () => {
         className="top"
         css={css`
           display: flex;
-          width: 112rem;
-          height: 5.1rem;
+          width: 100%;
+          height: 5rem;
         `}
       >
         <input
