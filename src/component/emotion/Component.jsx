@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 import { css } from '@emotion/react';
 import theme from '../../styles/theme';
 import { Header1 } from './FontComponent';
+import { Link } from 'react-router-dom';
 
 /**
  * 1200px의 Inner 컴포넌트, 가운데 정렬 처리 됨
@@ -119,9 +120,10 @@ export const Header = ({ type }) => {
         `}
       >
         <li>홈</li>
-        <li>국가별</li>
         <li>년도별</li>
-        <li>밈등록</li>
+        <Link to="/upload">
+          <li>밈등록</li>
+        </Link>
       </ul>
     </div>
   );
@@ -153,7 +155,7 @@ export const SearchBar = () => {
           gap: 1.6rem;
           margin: 1rem 1.6rem;
           background-color: transparent;
-          color: ${theme.palette.gray[400]};
+          color: ${theme.palette.gray[600]};
           ${theme.textVariants.body1};
         `}
       />
@@ -184,7 +186,7 @@ export const SelectBox = ({ type }) => {
     ],
     country: [
       { value: 'korea', name: '국내 밈' },
-      { value: 'foreign', name: '해외 밈' },
+      // { value: 'foreign', name: '해외 밈' },
       { value: 'japan', name: '일본 밈' },
     ],
     year: [
@@ -222,6 +224,8 @@ export const SelectBox = ({ type }) => {
   return (
     <div
       css={css`
+        position: absolute;
+        right: 10%; /* 우측 정렬 */
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -321,7 +325,7 @@ export const MemeInfoBox = () => {
   const [title, setTitle] = useState('제목');
   const [date, setDate] = useState('날짜');
   const [comment, setComment] = useState('댓글');
-  const [like, setLike] = useState('좋아요');
+  const [view, setView] = useState('조회수');
 
   return (
     <div>
@@ -392,7 +396,7 @@ export const MemeInfoBox = () => {
             `}
           >
             <div>{comment}</div>
-            <div>{like}</div>
+            <div>{view}</div>
           </div>
         </div>
       </div>
