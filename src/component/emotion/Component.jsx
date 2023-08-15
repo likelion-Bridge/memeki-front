@@ -2,7 +2,8 @@
 import React, { useState, useRef } from 'react';
 import { css } from '@emotion/react';
 import theme from '../../styles/theme';
-import { Header1 } from './FontComponent';
+import { Body1Bold, Header1 } from './FontComponent';
+import { Link } from 'react-router-dom';
 
 /**
  * 1200px의 Inner 컴포넌트, 가운데 정렬 처리 됨
@@ -119,9 +120,10 @@ export const Header = ({ type }) => {
         `}
       >
         <li>홈</li>
-        <li>국가별</li>
         <li>년도별</li>
-        <li>밈등록</li>
+        <Link to="/upload">
+          <li>밈등록</li>
+        </Link>
       </ul>
     </div>
   );
@@ -153,7 +155,7 @@ export const SearchBar = () => {
           gap: 1.6rem;
           margin: 1rem 1.6rem;
           background-color: transparent;
-          color: ${theme.palette.gray[400]};
+          color: ${theme.palette.gray[600]};
           ${theme.textVariants.body1};
         `}
       />
@@ -184,7 +186,7 @@ export const SelectBox = ({ type }) => {
     ],
     country: [
       { value: 'korea', name: '국내 밈' },
-      { value: 'foreign', name: '해외 밈' },
+      // { value: 'foreign', name: '해외 밈' },
       { value: 'japan', name: '일본 밈' },
     ],
     year: [
@@ -222,6 +224,8 @@ export const SelectBox = ({ type }) => {
   return (
     <div
       css={css`
+        position: absolute;
+        right: 10%; /* 우측 정렬 */
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -319,9 +323,9 @@ export const TextBox = ({ children, style }) => (
 // 썸네일이 보여지는 밈 문서
 export const MemeInfoBox = () => {
   const [title, setTitle] = useState('제목');
-  const [date, setDate] = useState('날짜');
+
   const [comment, setComment] = useState('댓글');
-  const [like, setLike] = useState('좋아요');
+  const [view, setView] = useState('조회수');
 
   return (
     <div>
@@ -369,20 +373,12 @@ export const MemeInfoBox = () => {
         <div
           css={css`
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             margin-top: 4.8rem;
             color: ${theme.palette.gray[500]};
             ${theme.textVariants.body2};
           `}
         >
-          <div
-            css={css`
-              color: ${theme.palette.gray[500]};
-              ${theme.textVariants.body2};
-            `}
-          >
-            {date}
-          </div>
           <div
             css={css`
               display: flex;
@@ -392,7 +388,7 @@ export const MemeInfoBox = () => {
             `}
           >
             <div>{comment}</div>
-            <div>{like}</div>
+            <div>{view}</div>
           </div>
         </div>
       </div>
@@ -412,7 +408,7 @@ export const Button = ({ type }) => {
           width: 16.9rem;
           height: 4.5rem;
           color: ${theme.palette.gray[500]};
-          ${theme.textVariants.body1_bold};
+          ${theme.textVariants.body1Bold};
           background-color: ${theme.palette.primary[400]};
           border-radius: 3rem;
         `}
@@ -431,7 +427,7 @@ export const Button = ({ type }) => {
           width: 9.9rem;
           height: 4.5rem;
           color: ${theme.palette.gray[500]};
-          ${theme.textVariants.body1_bold};
+          ${theme.textVariants.body1Bold};
           background-color: ${theme.palette.primary[400]};
           border-radius: 3rem;
         `}
@@ -501,5 +497,42 @@ export const MemeInfoBoxList = ({ children }) => {
     >
       {children}
     </div>
+  );
+};
+
+export const Document = () => {
+  return (
+    <div
+      css={css`
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.6rem;
+        background-color: ${theme.palette.primary[200]};
+        border-radius: 1rem;
+        border: 0.1rem solid ${theme.palette.primary[500]};
+        ${theme.textVariants.body1Bold};
+      `}
+    >
+      > 찾는 문서가 없나요?
+      <Button type="new"></Button>
+    </div>
+  );
+};
+
+export const FindText = ({ count }) => {
+  return (
+    <Body1Bold>
+      총{' '}
+      <span
+        css={css`
+          color: ${theme.palette.primary[500]};
+        `}
+      >
+        {count}개
+      </span>
+      의 문서를 찾았습니다.
+    </Body1Bold>
   );
 };

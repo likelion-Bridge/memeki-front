@@ -170,22 +170,12 @@ export const Comment = ({ type }) => {
 
   const [name, setName] = useState('김재연'); // 초기값 설정
   const [time, setTime] = useState('8시간 전'); // 초기값 설정
-  const [like, setLike] = useState(0); // 초기값 설정
-  const [hate, setHate] = useState(0); // 초기값 설정
 
   if (isHidden) {
     return null;
   }
   const handleDeleteClick = () => {
     setIsHidden(true);
-  };
-
-  const handleLikeClick = () => {
-    setLike(like + 1);
-  };
-
-  const handleHateClick = () => {
-    setHate(hate + 1);
   };
 
   if (type === 'reply') {
@@ -237,28 +227,6 @@ export const Comment = ({ type }) => {
               gap: 0.4rem;
             `}
           >
-            <img
-              src={process.env.PUBLIC_URL + './images/like.png'}
-              alt="like"
-              css={css`
-                width: 2.4rem;
-                height: 2.4rem;
-                cursor: pointer; /* 마우스를 올렸을 때 커서 모양 변경 */
-              `}
-              onClick={handleLikeClick} // 클릭 이벤트 추가
-            ></img>{' '}
-            {like}
-            <img
-              src={process.env.PUBLIC_URL + './images/hate.png'}
-              alt="hate"
-              css={css`
-                width: 2.4rem;
-                height: 2.4rem;
-                cursor: pointer; /* 마우스를 올렸을 때 커서 모양 변경 */
-              `}
-              onClick={handleHateClick} // 클릭 이벤트 추가
-            ></img>{' '}
-            {hate}
             <div
               className="delete"
               css={css`
@@ -322,28 +290,6 @@ export const Comment = ({ type }) => {
             gap: 0.4rem;
           `}
         >
-          <img
-            src={process.env.PUBLIC_URL + './images/like.png'}
-            alt="like"
-            css={css`
-              width: 2.4rem;
-              height: 2.4rem;
-              cursor: pointer; /* 마우스를 올렸을 때 커서 모양 변경 */
-            `}
-            onClick={handleLikeClick} // 클릭 이벤트 추가
-          ></img>{' '}
-          {like}
-          <img
-            src={process.env.PUBLIC_URL + './images/hate.png'}
-            alt="hate"
-            css={css`
-              width: 2.4rem;
-              height: 2.4rem;
-              cursor: pointer; /* 마우스를 올렸을 때 커서 모양 변경 */
-            `}
-            onClick={handleHateClick} // 클릭 이벤트 추가
-          ></img>{' '}
-          {hate}
           <div
             className="delete"
             css={css`
@@ -366,12 +312,11 @@ export const Comment = ({ type }) => {
           align-items: space-between;
           padding-left: 2.4rem;
           width: 112rem;
-          height: 5.7rem;
+          height: auto;
           margin-bottom: 1.6rem;
         `}
       >
         <div className="detail">어쩌구 저쩌구 저쩌저어쩌우</div>
-        <div className="reply">답글</div>
       </div>
     </div>
   );
