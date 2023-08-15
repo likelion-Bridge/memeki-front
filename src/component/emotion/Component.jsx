@@ -2,7 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { css } from '@emotion/react';
 import theme from '../../styles/theme';
-import { Header1 } from './FontComponent';
+import { Body1Bold, Header1 } from './FontComponent';
 import { Link } from 'react-router-dom';
 
 /**
@@ -523,11 +523,7 @@ export const Document = () => {
 
 export const FindText = ({ count }) => {
   return (
-    <div
-      css={css`
-        ${theme.textVariants.body1Bold};
-      `}
-    >
+    <Body1Bold>
       총{' '}
       <span
         css={css`
@@ -537,6 +533,6 @@ export const FindText = ({ count }) => {
         {count}개
       </span>
       의 문서를 찾았습니다.
-    </div>
+    </Body1Bold>
   );
 };
