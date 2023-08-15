@@ -1,9 +1,11 @@
 import React from 'react';
-import { Header, Inner, MemeInfoBox, MemeInfoBoxList } from '../emotion/Component';
+import { Header, Inner, MemeInfoBox, MemeInfoBoxList, Button } from '../emotion/Component';
 import { css } from '@emotion/react';
 import { Header1, Header2, Section, Title } from '../emotion/FontComponent';
 import theme from '../../styles/theme';
 import { SearchBar } from '../emotion/Component';
+import { Document } from '../emotion/Component';
+import { FindText } from '../emotion/Component';
 
 const Search = () => {
   return (
@@ -20,6 +22,8 @@ const Search = () => {
         <MemeInfoBox></MemeInfoBox>
         <MemeInfoBox></MemeInfoBox>
       </MemeInfoBoxList>
+      <FindText count={0}></FindText>
+      <Document></Document>
     </Inner>
   );
 };

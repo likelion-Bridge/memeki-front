@@ -323,7 +323,7 @@ export const TextBox = ({ children, style }) => (
 // 썸네일이 보여지는 밈 문서
 export const MemeInfoBox = () => {
   const [title, setTitle] = useState('제목');
-  const [date, setDate] = useState('날짜');
+
   const [comment, setComment] = useState('댓글');
   const [view, setView] = useState('조회수');
 
@@ -373,20 +373,12 @@ export const MemeInfoBox = () => {
         <div
           css={css`
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             margin-top: 4.8rem;
             color: ${theme.palette.gray[500]};
             ${theme.textVariants.body2};
           `}
         >
-          <div
-            css={css`
-              color: ${theme.palette.gray[500]};
-              ${theme.textVariants.body2};
-            `}
-          >
-            {date}
-          </div>
           <div
             css={css`
               display: flex;
@@ -416,7 +408,7 @@ export const Button = ({ type }) => {
           width: 16.9rem;
           height: 4.5rem;
           color: ${theme.palette.gray[500]};
-          ${theme.textVariants.body1_bold};
+          ${theme.textVariants.body1Bold};
           background-color: ${theme.palette.primary[400]};
           border-radius: 3rem;
         `}
@@ -435,7 +427,7 @@ export const Button = ({ type }) => {
           width: 9.9rem;
           height: 4.5rem;
           color: ${theme.palette.gray[500]};
-          ${theme.textVariants.body1_bold};
+          ${theme.textVariants.body1Bold};
           background-color: ${theme.palette.primary[400]};
           border-radius: 3rem;
         `}
@@ -504,6 +496,47 @@ export const MemeInfoBoxList = ({ children }) => {
       `}
     >
       {children}
+    </div>
+  );
+};
+
+export const Document = () => {
+  return (
+    <div
+      css={css`
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.6rem;
+        background-color: ${theme.palette.primary[200]};
+        border-radius: 1rem;
+        border: 0.1rem solid ${theme.palette.primary[500]};
+        ${theme.textVariants.body1Bold};
+      `}
+    >
+      > 찾는 문서가 없나요?
+      <Button type="new"></Button>
+    </div>
+  );
+};
+
+export const FindText = ({ count }) => {
+  return (
+    <div
+      css={css`
+        ${theme.textVariants.body1Bold};
+      `}
+    >
+      총{' '}
+      <span
+        css={css`
+          color: ${theme.palette.primary[500]};
+        `}
+      >
+        {count}개
+      </span>
+      의 문서를 찾았습니다.
     </div>
   );
 };
