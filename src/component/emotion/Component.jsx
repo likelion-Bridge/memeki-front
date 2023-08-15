@@ -225,7 +225,7 @@ export const SelectBox = ({ type }) => {
     <div
       css={css`
         position: absolute;
-        right: 10%; /* 우측 정렬 */
+        right: 10%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -453,17 +453,17 @@ export const Category = ({ type }) => {
   };
   const styles = {
     new: css`
-      cursor: pointer;
+      /* cursor: pointer; */
     `,
     newCheck: css`
-      cursor: pointer;
+      /* cursor: pointer; */
       color: ${theme.palette.primary[500]};
     `,
     popular: css`
-      cursor: pointer;
+      /* cursor: pointer; */
     `,
     popularCheck: css`
-      cursor: pointer;
+      /* cursor: pointer; */
       color: ${theme.palette.primary[500]};
     `,
   };
@@ -515,7 +515,7 @@ export const Document = () => {
         ${theme.textVariants.body1Bold};
       `}
     >
-      > 찾는 문서가 없나요?
+      &gt; 찾는 문서가 없나요?
       <Button type="new"></Button>
     </div>
   );

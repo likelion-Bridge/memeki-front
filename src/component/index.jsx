@@ -54,7 +54,6 @@ const index = () => {
               gap: 1.6rem;
             `}
           >
-            <Category type="newCheck" />
             <Category type="popular" />
           </Header1>
           <SelectBox type="date" />
@@ -73,7 +72,6 @@ const index = () => {
           <MemeInfoBox />
           <MemeInfoBox />
         </MemeInfoBoxList>
-        <Comment></Comment>
       </Section>
     </Inner>
   );
