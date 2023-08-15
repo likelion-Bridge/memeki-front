@@ -186,7 +186,7 @@ export const SelectBox = ({ type }) => {
     ],
     country: [
       { value: 'korea', name: '국내 밈' },
-      { value: 'foreign', name: '해외 밈' },
+      // { value: 'foreign', name: '해외 밈' },
       { value: 'japan', name: '일본 밈' },
     ],
     year: [
@@ -224,6 +224,8 @@ export const SelectBox = ({ type }) => {
   return (
     <div
       css={css`
+        position: absolute;
+        right: 10%; /* 우측 정렬 */
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -323,7 +325,7 @@ export const MemeInfoBox = () => {
   const [title, setTitle] = useState('제목');
   const [date, setDate] = useState('날짜');
   const [comment, setComment] = useState('댓글');
-  const [like, setLike] = useState('좋아요');
+  const [view, setView] = useState('조회수');
 
   return (
     <div>
@@ -394,7 +396,7 @@ export const MemeInfoBox = () => {
             `}
           >
             <div>{comment}</div>
-            <div>{like}</div>
+            <div>{view}</div>
           </div>
         </div>
       </div>

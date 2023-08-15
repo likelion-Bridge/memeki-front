@@ -13,6 +13,7 @@ import {
 import { css } from '@emotion/react';
 import { Header1, Header2, Section, Title } from './emotion/FontComponent';
 import theme from '../styles/theme';
+import { Comment } from './detail/Component';
 
 const index = () => {
   return (
@@ -72,6 +73,7 @@ const index = () => {
           <MemeInfoBox />
           <MemeInfoBox />
         </MemeInfoBoxList>
+        <Comment></Comment>
       </Section>
     </Inner>
   );
