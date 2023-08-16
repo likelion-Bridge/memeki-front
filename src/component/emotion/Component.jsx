@@ -86,14 +86,16 @@ export const Header = ({ type }) => {
         padding: 2.4rem 0;
       `}
     >
-      <img
-        src={process.env.PUBLIC_URL + '/images/logo.png'}
-        alt="logo"
-        css={css`
-          width: 10rem;
-          height: 3rem;
-        `}
-      ></img>
+      <Link to="/">
+        <img
+          src={process.env.PUBLIC_URL + '/images/logo.png'}
+          alt="logo"
+          css={css`
+            width: 10rem;
+            height: 3rem;
+          `}
+        />
+      </Link>
       <div
         css={css`
           ${styles[type].searchBar}
@@ -145,6 +147,9 @@ export const Header = ({ type }) => {
         </Link>
         <Link to="/year">
           <li>년도별</li>
+        </Link>
+        <Link to="/country">
+          <li>국가별</li>
         </Link>
         <Link to="/upload">
           <li>밈등록</li>
@@ -441,40 +446,43 @@ export const MemeInfoBox = () => {
   );
 };
 
-export const Button = ({ type }) => {
+export const Button = ({ type, onClick }) => {
   if (type === 'new') {
     return (
-      <div
-        css={css`
-          display: flex;
-          padding: 10px 33px;
-          justify-content: center;
-          align-items: center;
-          width: 16.9rem;
-          height: 4.5rem;
-          color: ${theme.palette.gray[500]};
-          ${theme.textVariants.body1Bold};
-          background-color: ${theme.palette.primary[400]};
-          border-radius: 3rem;
-        `}
-      >
-        새 문서 만들기
-      </div>
+      <Link to="/upload">
+        <div
+          onClick={onClick}
+          css={css`
+            display: flex;
+            padding: 10px 33px;
+            justify-content: center;
+            align-items: center;
+            width: 16.9rem;
+            height: 4.5rem;
+            color: ${theme.palette.gray[500]};
+            ${theme.textVariants.body1Bold};
+            background-color: ${theme.palette.primary[400]};
+            border-radius: 3rem;
+          `}
+        >
+          새 문서 만들기
+        </div>
+      </Link>
     );
   } else {
     return (
       <div
+        onClick={onClick}
         css={css`
           display: flex;
-          padding: 10px 33px;
+          padding: 1rem 3rem;
           justify-content: center;
           align-items: center;
-          width: 9.9rem;
-          height: 4.5rem;
           color: ${theme.palette.gray[500]};
           ${theme.textVariants.body1Bold};
           background-color: ${theme.palette.primary[400]};
           border-radius: 3rem;
+          cursor: pointer;
         `}
       >
         등록
@@ -579,5 +587,26 @@ export const FindText = ({ count }) => {
       </span>
       의 문서를 찾았습니다.
     </Body1Bold>
+  );
+};
+
+// 흰색 컴포넌트
+export const DocumentWrapper = ({ children }) => {
+  return (
+    <div
+      css={css`
+        width: 100%;
+        height: auto;
+        border-radius: 1.6rem;
+        padding: 8rem 4rem;
+        background-color: ${theme.palette.gray.white};
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8rem;
+      `}
+    >
+      {children}
+    </div>
   );
 };
