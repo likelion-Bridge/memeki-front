@@ -119,8 +119,12 @@ export const Header = ({ type }) => {
           ${styles[type].category};
         `}
       >
-        <li>홈</li>
-        <li>년도별</li>
+        <Link to="/">
+          <li>홈</li>
+        </Link>
+        <Link to="/year">
+          <li>년도별</li>
+        </Link>
         <Link to="/upload">
           <li>밈등록</li>
         </Link>
@@ -224,12 +228,9 @@ export const SelectBox = ({ type }) => {
   return (
     <div
       css={css`
-        position: absolute;
-        right: 10%;
+        position: relative; /* 부모 요소의 위치 기준으로 */
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: flex-end;
         gap: 1.6rem;
         z-index: 10;
         ${styles[type]}
@@ -272,6 +273,8 @@ export const SelectBox = ({ type }) => {
       {isOpen && (
         <ul
           css={css`
+            position: absolute; /* 드롭다운 박스를 절대 위치로 설정 */
+            top: 100%; /* 부모 요소 아래에 배치 */
             width: inherit;
             border-radius: 0.5rem;
             background: ${theme.palette.gray.white};
