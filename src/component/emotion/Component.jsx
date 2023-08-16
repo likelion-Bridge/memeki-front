@@ -3,7 +3,7 @@ import React, { useState, useRef } from 'react';
 import { css } from '@emotion/react';
 import theme from '../../styles/theme';
 import { Body1Bold, Header1 } from './FontComponent';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 
 /**
  * 1200px의 Inner 컴포넌트, 가운데 정렬 처리 됨
@@ -32,6 +32,24 @@ export const Inner = ({ children, style }) => (
  * @param {string} type 헤더의 형태(main, search)
  */
 export const Header = ({ type }) => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const searchTerm = queryParams.get('term') || '';
+
+  const navigate = useNavigate(); // useNavigate 훅 사용
+
+  const [searchInput, setSearchInput] = useState(searchTerm);
+
+  const handleSearchChange = (event) => {
+    const newSearchTerm = event.target.value;
+    setSearchInput(newSearchTerm);
+  };
+
+  const handleSearchEnter = (event) => {
+    if (event.key === 'Enter') {
+      navigate(`/search?term=${searchInput}`); // useNavigate로 라우팅 처리
+    }
+  };
   const styles = {
     main: {
       searchBar: css`
@@ -82,6 +100,9 @@ export const Header = ({ type }) => {
         `}
       >
         <input
+          value={searchInput}
+          onChange={handleSearchChange}
+          onKeyPress={handleSearchEnter}
           type="text"
           placeholder="밈을 검색해보세요"
           css={css`
@@ -135,6 +156,24 @@ export const Header = ({ type }) => {
 
 // 검색 바 컴포넌트
 export const SearchBar = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const searchTerm = queryParams.get('term') || '';
+
+  const navigate = useNavigate(); // useNavigate 훅 사용
+
+  const [searchInput, setSearchInput] = useState(searchTerm);
+
+  const handleSearchChange = (event) => {
+    const newSearchTerm = event.target.value;
+    setSearchInput(newSearchTerm);
+  };
+
+  const handleSearchEnter = (event) => {
+    if (event.key === 'Enter') {
+      navigate(`/search?term=${searchInput}`); // useNavigate로 라우팅 처리
+    }
+  };
   return (
     <div
       css={css`
@@ -148,6 +187,9 @@ export const SearchBar = () => {
       `}
     >
       <input
+        value={searchInput}
+        onChange={handleSearchChange}
+        onKeyPress={handleSearchEnter}
         type="text"
         placeholder="밈을 검색해보세요."
         css={css`
