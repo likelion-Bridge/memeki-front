@@ -114,27 +114,6 @@ export const DocumentSection = ({ subTitle, context }) => {
   );
 };
 
-// 흰색 컴포넌트
-export const DocumentWrapper = ({ children }) => {
-  return (
-    <div
-      css={css`
-        width: 100%;
-        height: auto;
-        border-radius: 1.6rem;
-        padding: 8rem 4rem;
-        background-color: ${theme.palette.gray.white};
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8rem;
-      `}
-    >
-      {children}
-    </div>
-  );
-};
-
 // 댓글 컴포넌트
 export const CommentBox = ({ comment, children }) => {
   return (
