@@ -6,7 +6,7 @@ import theme from '../../styles/theme';
 import { TextBox } from '../emotion/Component';
 
 // 제목을 보여주는 컴포넌트
-export const DocumentTitle = ({ title }) => {
+export const DocumentTitle = ({ title, onClick }) => {
   return (
     <TextBox
       style={css`
@@ -20,7 +20,15 @@ export const DocumentTitle = ({ title }) => {
           align-items: flex-end;
         `}
       >
-        <Body1Bold>[편집]</Body1Bold>
+        <div
+          onClick={onClick}
+          css={css`
+            ${theme.textVariants.body1Bold}
+            cursor: pointer;
+          `}
+        >
+          [편집]
+        </div>
       </div>
     </TextBox>
   );
@@ -149,7 +157,7 @@ export const Comment = ({ type }) => {
   const [passwordInput, setPasswordInput] = useState(''); // State for password input
 
   const [name, setName] = useState('김재연'); // 초기값 설정
-  const [time, setTime] = useState('8시간 전'); // 초기값 설정
+  // const [time, setTime] = useState('8시간 전'); // 초기값 설정
 
   if (isHidden) {
     return null;
@@ -202,7 +210,8 @@ export const Comment = ({ type }) => {
                 margin-right: 0.8rem;
               `}
             ></img>
-            {name}&nbsp;&nbsp;·&nbsp;&nbsp;{time}
+            {name}
+            {/* &nbsp;&nbsp;·&nbsp;&nbsp;{time} */}
           </div>
           <div
             className="option"
@@ -265,7 +274,8 @@ export const Comment = ({ type }) => {
         `}
       >
         <div className="status">
-          {name}&nbsp;&nbsp;·&nbsp;&nbsp;{time}
+          {name}
+          {/* &nbsp;&nbsp;·&nbsp;&nbsp;{time} */}
         </div>
         <div
           className="option"
