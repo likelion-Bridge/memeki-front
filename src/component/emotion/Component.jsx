@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { css } from '@emotion/react';
 import theme from '../../styles/theme';
 import { Body1Bold, Header1 } from './FontComponent';
@@ -35,10 +35,19 @@ export const Header = ({ type }) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const searchTerm = queryParams.get('term') || '';
+  const [scrollState, setScrollState] = useState(false);
 
   const navigate = useNavigate(); // useNavigate 훅 사용
 
   const [searchInput, setSearchInput] = useState(searchTerm);
+
+  const handleScroll = () => {
+    if (window.scrollY || document.documentElement.scrollTop > 0) {
+      setScrollState(true);
+    } else {
+      setScrollState(false);
+    }
+  };
 
   const handleSearchChange = (event) => {
     const newSearchTerm = event.target.value;
@@ -50,6 +59,13 @@ export const Header = ({ type }) => {
       navigate(`/search?term=${searchInput}`); // useNavigate로 라우팅 처리
     }
   };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   const styles = {
     main: {
       searchBar: css`
@@ -371,12 +387,7 @@ export const TextBox = ({ children, style }) => (
 );
 
 // 썸네일이 보여지는 밈 문서
-export const MemeInfoBox = () => {
-  const [title, setTitle] = useState('제목');
-
-  const [comment, setComment] = useState('댓글');
-  const [view, setView] = useState('조회수');
-
+export const MemeInfoBox = ({ title, comment, view, link }) => {
   return (
     <div>
       <div
@@ -400,15 +411,31 @@ export const MemeInfoBox = () => {
             justify-content: center;
           `}
         >
-          <img
-            src={process.env.PUBLIC_URL + '/images/logo.png'}
-            alt="search"
-            css={css`
-              margin: 0.8rem 1.6rem;
-              width: 10rem;
-              height: 3rem;
-            `}
-          ></img>
+          {link ? (
+            <img
+              src={link}
+              alt={title + 'img'}
+              css={css`
+                /* margin: 0.8rem 1.6rem; */
+                height: inherit;
+                background-position: 50% 50%;
+                background-repeat: no-repeat;
+                &.contain {
+                  background-size: contain;
+                }
+              `}
+            />
+          ) : (
+            <img
+              src={process.env.PUBLIC_URL + '/images/logo.png'}
+              alt="search"
+              css={css`
+                margin: 0.8rem 1.6rem;
+                width: 10rem;
+                height: 3rem;
+              `}
+            />
+          )}
         </div>
         <div
           className="textbox"
