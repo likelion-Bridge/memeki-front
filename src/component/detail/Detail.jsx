@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import React from 'react';
 import {
   Comment,
@@ -10,6 +11,8 @@ import {
 } from './Component';
 import { DocumentWrapper, Header, Inner } from '../emotion/Component';
 import { Section } from '../emotion/FontComponent';
+import { Button } from '../emotion/Component';
+import { css } from '@emotion/react';
 
 const Detail = () => {
   return (
@@ -21,15 +24,11 @@ const Detail = () => {
           <DocumentInfo comment={3} view={102} />
         </Section>
 
-        <Section>
+        {/* <Section>
           <DocumentIndex />
-        </Section>
+        </Section> */}
 
         <Section gap={8}>
-          <DocumentSection subTitle="소제목..." context="내용..." />
-          <DocumentSection subTitle="소제목..." context="내용..." />
-          <DocumentSection subTitle="소제목..." context="내용..." />
-          <DocumentSection subTitle="소제목..." context="내용..." />
           <DocumentSection subTitle="소제목..." context="내용..." />
         </Section>
 
@@ -38,7 +37,16 @@ const Detail = () => {
             <Comment />
             <Comment />
             <Comment />
+
             <CommentInput />
+            <Section
+              style={css`
+                padding-top: 3.2rem;
+                float: right;
+              `}
+            >
+              <Button></Button>
+            </Section>
           </CommentBox>
         </Section>
       </DocumentWrapper>

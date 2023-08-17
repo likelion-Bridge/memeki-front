@@ -105,7 +105,7 @@ export const DocumentSection = ({ subTitle, context }) => {
             align-items: center;
           `}
         >
-          <img src={process.env.PUBLIC_URL + '/images/selectIcon.png'} alt="icon" />
+          {/* <img src={process.env.PUBLIC_URL + '/images/selectIcon.png'} alt="icon" /> */}
         </div>
         <Header1>{subTitle}</Header1>
       </div>
@@ -145,7 +145,8 @@ export const CommentBox = ({ comment, children }) => {
 };
 
 export const Comment = ({ type }) => {
-  const [isHidden, setIsHidden] = useState(false); // 상태 추가
+  const [isHidden, setIsHidden] = useState(false);
+  const [passwordInput, setPasswordInput] = useState(''); // State for password input
 
   const [name, setName] = useState('김재연'); // 초기값 설정
   const [time, setTime] = useState('8시간 전'); // 초기값 설정
@@ -154,7 +155,12 @@ export const Comment = ({ type }) => {
     return null;
   }
   const handleDeleteClick = () => {
-    setIsHidden(true);
+    const password = prompt('비밀번호를 입력하세요:'); // Use prompt to get password input
+    if (password === '1234') {
+      setIsHidden(true);
+    } else {
+      alert('비밀번호가 일치하지 않습니다.');
+    }
   };
 
   if (type === 'reply') {

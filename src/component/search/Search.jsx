@@ -16,6 +16,7 @@ const Search = () => {
       `}
     >
       <Header type="main" />
+
       <SearchBar></SearchBar>
       <MemeInfoBoxList>
         <MemeInfoBox></MemeInfoBox>
