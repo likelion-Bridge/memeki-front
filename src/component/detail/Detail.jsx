@@ -8,9 +8,8 @@ import {
   DocumentInfo,
   DocumentSection,
   DocumentTitle,
-  DocumentWrapper,
 } from './Component';
-import { Header, Inner } from '../emotion/Component';
+import { DocumentWrapper, Header, Inner } from '../emotion/Component';
 import { Section } from '../emotion/FontComponent';
 import { Button } from '../emotion/Component';
 import { css } from '@emotion/react';

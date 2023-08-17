@@ -106,7 +106,7 @@ export const UploadMeme = ({ type }) => {
             />
             <input
               type="none"
-              placeholder='소제목을 입력하세요 (목차번호 예시. "1", or "1.1.")'
+              placeholder="소제목을 입력하세요"
               css={css`
                 margin: 3.2rem;
                 width: 37.2rem;
@@ -171,7 +171,7 @@ export const UploadMeme = ({ type }) => {
             />
             <input
               type="text"
-              placeholder='소제목을 입력하세요 (목차번호 예시. "1", or "1.1.")'
+              placeholder="소제목을 입력하세요"
               css={css`
                 margin: 3.2rem;
                 width: 37.2rem;
