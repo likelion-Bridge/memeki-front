@@ -22,9 +22,9 @@ const Detail = () => {
           <DocumentInfo comment={3} view={102} />
         </Section>
 
-        <Section>
+        {/* <Section>
           <DocumentIndex />
-        </Section>
+        </Section> */}
 
         <Section gap={8}>
           <DocumentSection subTitle="소제목..." context="내용..." />
