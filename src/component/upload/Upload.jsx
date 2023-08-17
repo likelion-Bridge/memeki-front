@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Upload = () => {
   const navigate = useNavigate();
+
   const ButtonClick = () => {
     if (window.confirm('등록하시겠습니까?')) {
       // console.log('등록');
