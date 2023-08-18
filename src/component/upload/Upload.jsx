@@ -6,6 +6,7 @@ import { MemeTitle, UploadMeme } from './Component';
 import theme from '../../styles/theme';
 import { useLocation, useNavigate } from 'react-router-dom';
 import selectOptions from '../store/SelectOptions';
+import axios from 'axios';
 
 const Upload = () => {
   const navigate = useNavigate();
@@ -22,13 +23,33 @@ const Upload = () => {
     setYearSelectedOption(optionName);
   };
 
-  const ButtonClick = () => {
+  const ButtonClick = async () => {
     if (window.confirm('등록하시겠습니까?')) {
-      // console.log('등록');
-      // 등록하면 해당 밈 문서로 이동
-      navigate('/');
+      const editorComponent = document.querySelector('.ql-editor');
+      if (editorComponent) {
+        const images = editorComponent.querySelectorAll('img');
+        const imageUrls = Array.from(images).map((img) => img.getAttribute('src'));
+
+        const dataToSend = {
+          explanation: 'string',
+          link: 'string',
+          name: 'string',
+          outline: 'string',
+          year: 0,
+        };
+
+        try {
+          // POST 요청 보내기
+          const response = await axios.post('/api/wiki', dataToSend);
+          console.log('Server response:', response.data);
+          navigate('/');
+        } catch (error) {
+          console.error('Error sending POST request:', error);
+        }
+      }
     }
   };
+
   return (
     <Inner
       style={css`
