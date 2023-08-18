@@ -12,11 +12,12 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/detail" element={<Detail />} />
+          <Route path="/detail/:id" element={<Detail />} />
           <Route path="/country" element={<Country />} />
           <Route path="/year" element={<Year />} />
           <Route path="/search" element={<Search />} />
           <Route path="/upload" element={<Upload />} />
+          <Route path="/upload/:id" element={<Upload />} />
         </Routes>
       </BrowserRouter>
     </div>
