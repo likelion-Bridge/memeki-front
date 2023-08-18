@@ -6,21 +6,21 @@ import './quill.snow.css';
 import theme from '../../styles/theme';
 
 export const UploadMeme = ({ type, subTitle, onSubTitle, onExplanationChange, explanation }) => {
-  const [isVisible, setIsVisible] = useState(true);
-  const [displayText, setDisplayText] = useState('네');
+  // const [isVisible, setIsVisible] = useState(true);
+  // const [displayText, setDisplayText] = useState('네');
   // const [subTitle, setSubTitle] = useState(outline);
 
-  const handleClick = () => {
-    setIsVisible(false);
-  };
+  // const handleClick = () => {
+  //   setIsVisible(false);
+  // };
 
-  const handleToggle = () => {
-    if (displayText === '네') {
-      setDisplayText('아니오');
-    } else {
-      setDisplayText('네');
-    }
-  };
+  // const handleToggle = () => {
+  //   if (displayText === '네') {
+  //     setDisplayText('아니오');
+  //   } else {
+  //     setDisplayText('네');
+  //   }
+  // };
 
   // const onChangeSubTitle = (e) => {
   //   setSubTitle(e.target.value);
@@ -178,8 +178,8 @@ export const UploadMeme = ({ type, subTitle, onSubTitle, onExplanationChange, ex
           <input
             type="text"
             placeholder="소제목을 입력하세요"
-            // onChange={onChangeSubTitle}
-            // value={subTitle}
+            onChange={onSubTitle}
+            value={subTitle}
             css={css`
               margin: 3.2rem;
               width: 105.28rem;
@@ -192,15 +192,15 @@ export const UploadMeme = ({ type, subTitle, onSubTitle, onExplanationChange, ex
             padding-left: 2rem;
           `}
         >
-          <MyEditor />
+          <MyEditor explanation={explanation} onExplanationChange={onExplanationChange} />
         </div>
       </div>
     </div>
   );
 };
 
-export const MyEditor = () => {
-  const [editorHtml, setEditorHtml] = useState('');
+export const MyEditor = (explanation, onExplanationChange) => {
+  const [editorHtml, setEditorHtml] = useState(explanation);
 
   const modules = {
     toolbar: {
@@ -225,8 +225,8 @@ export const MyEditor = () => {
     'video',
   ];
 
-  const handleEditorChange = (html) => {
-    setEditorHtml(html);
+  const handleEditorChange = () => {
+    console.log(editorHtml);
   };
 
   return (
