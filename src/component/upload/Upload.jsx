@@ -4,10 +4,13 @@ import { css } from '@emotion/react';
 import { Body2Bold, Section } from '../emotion/FontComponent';
 import { MemeTitle, UploadMeme } from './Component';
 import theme from '../../styles/theme';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Upload = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const info = location.state;
+  // console.log(info.outline);
 
   const ButtonClick = () => {
     if (window.confirm('등록하시겠습니까?')) {
@@ -43,14 +46,14 @@ const Upload = () => {
               align-items: center;
             `}
           >
-            <MemeTitle />
+            <MemeTitle title={info.name} />
           </Section>
           <Section
             style={css`
               align-items: flex-end;
             `}
           >
-            <UploadMeme></UploadMeme>
+            <UploadMeme outline={info.outline ? info.outline : ''}></UploadMeme>
             {/* <UploadMeme type="sub"></UploadMeme> */}
             <Button onClick={ButtonClick} />
           </Section>
