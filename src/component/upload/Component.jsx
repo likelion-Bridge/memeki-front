@@ -5,13 +5,14 @@ import { css } from '@emotion/react';
 import './quill.snow.css';
 import theme from '../../styles/theme';
 
-export const UploadMeme = ({ type }) => {
+export const UploadMeme = ({ type, outline }) => {
   const [isVisible, setIsVisible] = useState(true);
+  const [displayText, setDisplayText] = useState('네');
+  // const [subTitle, setSubTitle] = useState(outline);
 
   const handleClick = () => {
     setIsVisible(false);
   };
-  const [displayText, setDisplayText] = useState('네');
 
   const handleToggle = () => {
     if (displayText === '네') {
@@ -20,6 +21,11 @@ export const UploadMeme = ({ type }) => {
       setDisplayText('네');
     }
   };
+
+  // const onChangeSubTitle = (e) => {
+  //   setSubTitle(e.target.value);
+  //   console.log('subTitle', subTitle);
+  // };
 
   if (type === 'sub') {
     return (
@@ -172,6 +178,8 @@ export const UploadMeme = ({ type }) => {
             <input
               type="text"
               placeholder="소제목을 입력하세요"
+              // onChange={onChangeSubTitle}
+              // value={subTitle}
               css={css`
                 margin: 3.2rem;
                 width: 37.2rem;
@@ -254,11 +262,18 @@ export const MyEditor = () => {
   );
 };
 
-export const MemeTitle = () => {
+export const MemeTitle = ({ title }) => {
+  const [value, setValue] = useState(title);
+
+  const onChange = (e) => {
+    setValue(e.target.value);
+  };
   return (
     <input
       type="text"
       placeholder="밈의 이름을 정의해주세요"
+      value={value}
+      onChange={onChange}
       css={css`
         width: 112rem;
         height: 8rem;
@@ -266,8 +281,8 @@ export const MemeTitle = () => {
         align-items: center;
         display: flex;
         border: 0.2rem solid ${theme.palette.primary[500]};
-        ${theme.textVariants.body1}
-        color: ${theme.palette.gray[400]};
+        ${theme.textVariants.header2}
+        color: ${theme.palette.gray[600]};
         padding: 1.6rem 3.2rem;
       `}
     />

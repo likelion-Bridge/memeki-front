@@ -20,7 +20,7 @@ const Detail = () => {
   const info = location.state;
 
   const EditClick = () => {
-    navigate('/upload');
+    navigate(`/upload/${info.id}`, { state: info });
   };
 
   const ButtonClick = () => {

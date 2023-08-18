@@ -17,6 +17,7 @@ function App() {
           <Route path="/year" element={<Year />} />
           <Route path="/search" element={<Search />} />
           <Route path="/upload" element={<Upload />} />
+          <Route path="/upload/:id" element={<Upload />} />
         </Routes>
       </BrowserRouter>
     </div>
