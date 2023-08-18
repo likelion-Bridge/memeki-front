@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 import './quill.snow.css';
 import theme from '../../styles/theme';
 
-export const UploadMeme = ({ type, outline }) => {
+export const UploadMeme = ({ type, subTitle, onSubTitle, onExplanationChange, explanation }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [displayText, setDisplayText] = useState('네');
   // const [subTitle, setSubTitle] = useState(outline);
@@ -237,14 +237,6 @@ export const MyEditor = () => {
     }
   };
 
-  const insertVideo = () => {
-    const url = prompt('Enter the video URL:');
-    if (url) {
-      const range = this.quill.getEditor().getSelection();
-      this.quill.getEditor().insertEmbed(range.index, 'video', url, 'user');
-    }
-  };
-
   return (
     <div
       css={css`
@@ -262,17 +254,12 @@ export const MyEditor = () => {
   );
 };
 
-export const MemeTitle = ({ title }) => {
-  const [value, setValue] = useState(title);
-
-  const onChange = (e) => {
-    setValue(e.target.value);
-  };
+export const MemeTitle = ({ title, onChange }) => {
   return (
     <input
       type="text"
       placeholder="밈의 이름을 정의해주세요"
-      value={value}
+      value={title}
       onChange={onChange}
       css={css`
         width: 112rem;

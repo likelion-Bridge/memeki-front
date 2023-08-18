@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import theme from '../../styles/theme';
 import { Body1Bold, Body2 } from './FontComponent';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
+import selectOptions from '../store/SelectOptions';
 
 /**
  * 1200px의 Inner 컴포넌트, 가운데 정렬 처리 됨
@@ -244,25 +245,7 @@ export const SearchBar = () => {
  * z-index 손봐야 할 수도 있음
  * @param {string} type select목록 (date, country, year)
  */
-export const SelectBox = ({ type }) => {
-  const options = {
-    date: [
-      { value: 'week', name: '이번 주' },
-      { value: 'month', name: '이번 달' },
-      { value: 'year', name: '올해' },
-    ],
-    country: [
-      { value: 'korea', name: '국내 밈' },
-      // { value: 'foreign', name: '해외 밈' },
-      { value: 'japan', name: '일본 밈' },
-    ],
-    year: [
-      { value: '1900', name: '2000년 이전' },
-      { value: '2000', name: '2000년 대' },
-      { value: '2010', name: '2010년 대' },
-      { value: '2020', name: '2020년 대' },
-    ],
-  };
+export const SelectBox = ({ type, selectClick, selectedOption }) => {
   const styles = {
     date: css`
       width: 10.3rem;
@@ -275,11 +258,10 @@ export const SelectBox = ({ type }) => {
     `,
   };
   const [rotationDegree, setRotationDegree] = useState(0);
-  const [selectedOption, setSelectedOption] = useState(options[type][0].name);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOptionClick = (optionName) => {
-    setSelectedOption(optionName);
+    selectClick(optionName);
     setIsOpen(false);
   };
 
@@ -344,7 +326,7 @@ export const SelectBox = ({ type }) => {
             box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.05);
           `}
         >
-          {options[type].map((option) => (
+          {selectOptions[type].map((option) => (
             <li
               key={option.value}
               onClick={() => handleOptionClick(option.name)}
@@ -422,13 +404,11 @@ export const MemeInfoBox = ({ item }) => {
             src={item.link}
             alt={item.name + 'img'}
             css={css`
-              /* margin: 0.8rem 1.6rem; */
-              height: inherit;
-              background-position: 50% 50%;
-              background-repeat: no-repeat;
-              &.contain {
-                background-size: contain;
-              }
+              max-width: 100%;
+              max-height: 100%;
+              width: auto;
+              height: auto;
+              object-fit: contain;
             `}
           />
         ) : (
