@@ -404,13 +404,11 @@ export const MemeInfoBox = ({ item }) => {
             src={item.link}
             alt={item.name + 'img'}
             css={css`
-              /* margin: 0.8rem 1.6rem; */
-              height: inherit;
-              background-position: 50% 50%;
-              background-repeat: no-repeat;
-              &.contain {
-                background-size: contain;
-              }
+              max-width: 100%;
+              max-height: 100%;
+              width: auto;
+              height: auto;
+              object-fit: contain;
             `}
           />
         ) : (

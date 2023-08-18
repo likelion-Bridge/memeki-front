@@ -4,7 +4,6 @@ import {
   Header,
   Inner,
   SearchBar,
-  SelectBox,
   TextBox,
   MemeInfoBox,
   Category,
