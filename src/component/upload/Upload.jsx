@@ -14,6 +14,20 @@ const Upload = () => {
 
   const [countrySelectedOption, setCountrySelectedOption] = useState(selectOptions.country[0].name);
   const [yearSelectedOption, setYearSelectedOption] = useState(selectOptions.year[0].name);
+  const [title, setTitle] = useState(info ? info.name : '');
+  const [subTitle, setSubTitle] = useState(info ? info.outline : '');
+  const [explanation, setExplanation] = useState(info ? info.explanation : '');
+
+  const onExplanationChange = (e) => {
+    setExplanation(e.target.value);
+  };
+
+  const onSubTitleChange = (e) => {
+    setSubTitle(e.target.value);
+  };
+  const onTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
 
   const CountrySelectClick = (optionName) => {
     setCountrySelectedOption(optionName);
@@ -64,14 +78,19 @@ const Upload = () => {
               align-items: center;
             `}
           >
-            <MemeTitle title={info ? info.name : ''} />
+            <MemeTitle title={title} onChange={onTitleChange} />
           </Section>
           <Section
             style={css`
               align-items: flex-end;
             `}
           >
-            <UploadMeme outline={info ? info.outline : ''}></UploadMeme>
+            <UploadMeme
+              subTitle={subTitle}
+              onSubTitle={onSubTitleChange}
+              onExplanationChange={onExplanationChange}
+              explanation={explanation}
+            />
             {/* <UploadMeme type="sub"></UploadMeme> */}
             <Button onClick={ButtonClick} />
           </Section>
