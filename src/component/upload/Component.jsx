@@ -237,14 +237,6 @@ export const MyEditor = () => {
     }
   };
 
-  const insertVideo = () => {
-    const url = prompt('Enter the video URL:');
-    if (url) {
-      const range = this.quill.getEditor().getSelection();
-      this.quill.getEditor().insertEmbed(range.index, 'video', url, 'user');
-    }
-  };
-
   return (
     <div
       css={css`
