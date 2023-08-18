@@ -40,11 +40,11 @@ const Detail = () => {
         </Section> */}
 
         <Section gap={8}>
-          <DocumentSection subTitle={info.outline} context={info.explanation} />
+          <DocumentSection subTitle={info.outline} context={info.explanation} link={info.link} />
         </Section>
 
         <Section>
-          <CommentBox comment={info.comment ? info.comment : 3}>
+          <CommentBox comment={info.comment ? info.comment : 0}>
             <Comment />
             <Comment />
             <Comment />

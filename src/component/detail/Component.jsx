@@ -90,7 +90,7 @@ export const DocumentIndex = () => {
 };
 
 // 소제목을 나눠주는 컴포넌트
-export const DocumentSection = ({ subTitle, context }) => {
+export const DocumentSection = ({ subTitle, context, link }) => {
   return (
     <div
       css={css`
@@ -117,6 +117,7 @@ export const DocumentSection = ({ subTitle, context }) => {
         </div>
         <Header1>{subTitle}</Header1>
       </div>
+      <img src={link} alt={'img'} />
       <Body1>{context}</Body1>
     </div>
   );
