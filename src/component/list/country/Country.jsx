@@ -11,23 +11,35 @@ import {
 } from '../../emotion/Component';
 import { Header1, Section } from '../../emotion/FontComponent';
 import { css } from '@emotion/react';
+import selectOptions from '../../store/SelectOptions';
 
 const Country = () => {
   const [wikiData, setWikiData] = useState(null);
+  const [countrySelectedOption, setCountrySelectedOption] = useState(selectOptions.country[0].name);
 
   useEffect(() => {
-    // 데이터를 가져오는 함수를 정의합니다.
     const fetchData = async () => {
+      let response;
       try {
-        const response = await axios.get('/api/wiki');
-        setWikiData(response.data); // 가져온 데이터를 상태에 저장
+        if (countrySelectedOption === '일본 밈') {
+          response = await axios.get('/api/wiki/jp');
+        } else if (countrySelectedOption === '국내 밈') {
+          response = await axios.get('/api/wiki');
+        }
+
+        setWikiData(response.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('데이터 가져오기 오류:', error);
       }
     };
 
-    fetchData(); // 데이터를 가져오는 함수를 호출
-  }, []);
+    fetchData();
+  }, [countrySelectedOption]);
+
+  const CountrySelectClick = (optionName) => {
+    setCountrySelectedOption(optionName);
+  };
+
   return (
     <Inner>
       <Header type="search" />
@@ -41,7 +53,11 @@ const Country = () => {
           >
             <Category type="country" />
           </Header1>
-          <SelectBox type="country" />
+          <SelectBox
+            selectClick={CountrySelectClick}
+            selectedOption={countrySelectedOption}
+            type="country"
+          />
         </TextBox>
         <MemeInfoBoxList>
           {wikiData ? (
