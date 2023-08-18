@@ -22,18 +22,30 @@ const Year = () => {
   };
 
   useEffect(() => {
-    // 데이터를 가져오는 함수를 정의합니다.
     const fetchData = async () => {
       try {
         const response = await axios.get('/api/wiki');
-        setWikiData(response.data); // 가져온 데이터를 상태에 저장
+        const filteredData = response.data.filter((item) => {
+          if (yearSelectedOption === '2000년 이전') {
+            return parseInt(item.year) < 2000;
+          } else if (yearSelectedOption === '2000년 대') {
+            return parseInt(item.year) >= 2000 && parseInt(item.year) < 2010;
+          } else if (yearSelectedOption === '2010년 대') {
+            return parseInt(item.year) >= 2010 && parseInt(item.year) < 2020;
+          } else if (yearSelectedOption === '2020년 대') {
+            return parseInt(item.year) >= 2020 && parseInt(item.year) < 2030;
+          }
+          return true; // 기본적으로 모든 데이터 표시
+        });
+        setWikiData(filteredData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
-    fetchData(); // 데이터를 가져오는 함수를 호출
-  }, []);
+    fetchData();
+  }, [yearSelectedOption]);
+
   return (
     <Inner>
       <Header type="search" />
@@ -48,8 +60,8 @@ const Year = () => {
             <Category type="year" />
           </Header1>
           <SelectBox
-            selectClick={YearSelectClick}
             selectedOption={yearSelectedOption}
+            selectClick={YearSelectClick}
             type="year"
           />
         </TextBox>

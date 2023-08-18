@@ -17,23 +17,29 @@ const Country = () => {
   const [wikiData, setWikiData] = useState(null);
   const [countrySelectedOption, setCountrySelectedOption] = useState(selectOptions.country[0].name);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      let response;
+      try {
+        if (countrySelectedOption === '일본 밈') {
+          response = await axios.get('/api/wiki/jp');
+        } else if (countrySelectedOption === '국내 밈') {
+          response = await axios.get('/api/wiki');
+        }
+
+        setWikiData(response.data);
+      } catch (error) {
+        console.error('데이터 가져오기 오류:', error);
+      }
+    };
+
+    fetchData();
+  }, [countrySelectedOption]);
+
   const CountrySelectClick = (optionName) => {
     setCountrySelectedOption(optionName);
   };
 
-  useEffect(() => {
-    // 데이터를 가져오는 함수를 정의합니다.
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/api/wiki');
-        setWikiData(response.data); // 가져온 데이터를 상태에 저장
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData(); // 데이터를 가져오는 함수를 호출
-  }, []);
   return (
     <Inner>
       <Header type="search" />
