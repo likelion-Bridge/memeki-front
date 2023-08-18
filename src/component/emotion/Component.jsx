@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 import theme from '../../styles/theme';
-import { Body1Bold, Header1 } from './FontComponent';
+import { Body1Bold, Body2 } from './FontComponent';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 
 /**
@@ -387,86 +387,91 @@ export const TextBox = ({ children, style }) => (
 );
 
 // 썸네일이 보여지는 밈 문서
-export const MemeInfoBox = ({ title, comment, view, link }) => {
+export const MemeInfoBox = ({ item }) => {
+  const navigate = useNavigate();
+  const BoxClick = () => {
+    navigate(`/detail/${item.id}`, { state: item });
+  };
+
   return (
-    <div>
+    <div
+      className="container"
+      onClick={BoxClick}
+      css={css`
+        width: 37.6rem;
+        height: 39.5rem;
+        border-radius: 1.9rem;
+        background-color: ${theme.palette.primary[500]};
+        padding: 1.6rem;
+        cursor: pointer;
+      `}
+    >
       <div
-        className="container"
+        className="imgbox"
         css={css`
-          width: 37.6rem;
-          height: 39.5rem;
+          height: 22.4rem;
           border-radius: 1.9rem;
-          background-color: ${theme.palette.primary[500]};
-          padding: 1.6rem;
+          background-color: ${theme.palette.gray.white};
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        `}
+      >
+        {item.link ? (
+          <img
+            src={item.link}
+            alt={item.name + 'img'}
+            css={css`
+              /* margin: 0.8rem 1.6rem; */
+              height: inherit;
+              background-position: 50% 50%;
+              background-repeat: no-repeat;
+              &.contain {
+                background-size: contain;
+              }
+            `}
+          />
+        ) : (
+          <img
+            src={process.env.PUBLIC_URL + '/images/logo.png'}
+            alt="search"
+            css={css`
+              margin: 0.8rem 1.6rem;
+              width: 10rem;
+              height: 3rem;
+            `}
+          />
+        )}
+      </div>
+      <div
+        className="textbox"
+        css={css`
+          margin-top: 3.2rem;
+          color: ${theme.palette.gray[500]};
+          ${theme.textVariants.header2};
+        `}
+      >
+        {item.name}
+      </div>
+      <div
+        css={css`
+          display: flex;
+          justify-content: flex-end;
+          margin-top: 4.8rem;
+          color: ${theme.palette.gray[500]};
+          ${theme.textVariants.body2};
         `}
       >
         <div
-          className="imgbox"
-          css={css`
-            height: 22.4rem;
-            border-radius: 1.9rem;
-            background-color: ${theme.palette.gray.white};
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          `}
-        >
-          {link ? (
-            <img
-              src={link}
-              alt={title + 'img'}
-              css={css`
-                /* margin: 0.8rem 1.6rem; */
-                height: inherit;
-                background-position: 50% 50%;
-                background-repeat: no-repeat;
-                &.contain {
-                  background-size: contain;
-                }
-              `}
-            />
-          ) : (
-            <img
-              src={process.env.PUBLIC_URL + '/images/logo.png'}
-              alt="search"
-              css={css`
-                margin: 0.8rem 1.6rem;
-                width: 10rem;
-                height: 3rem;
-              `}
-            />
-          )}
-        </div>
-        <div
-          className="textbox"
-          css={css`
-            margin-top: 3.2rem;
-            color: ${theme.palette.gray[500]};
-            ${theme.textVariants.header2};
-          `}
-        >
-          {title}
-        </div>
-        <div
           css={css`
             display: flex;
-            justify-content: flex-end;
-            margin-top: 4.8rem;
+            gap: 1.6rem;
             color: ${theme.palette.gray[500]};
             ${theme.textVariants.body2};
           `}
         >
-          <div
-            css={css`
-              display: flex;
-              gap: 1.6rem;
-              color: ${theme.palette.gray[500]};
-              ${theme.textVariants.body2};
-            `}
-          >
-            <div>{comment}</div>
-            <div>{view}</div>
-          </div>
+          <Body2>댓글 {item.comment ? item.comment : 0}</Body2>
+          <Body2>조회수 {item.view ? item.view : 0}</Body2>
         </div>
       </div>
     </div>

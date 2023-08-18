@@ -4,7 +4,6 @@ import {
   Comment,
   CommentBox,
   CommentInput,
-  DocumentIndex,
   DocumentInfo,
   DocumentSection,
   DocumentTitle,
@@ -13,10 +12,12 @@ import { DocumentWrapper, Header, Inner } from '../emotion/Component';
 import { Section } from '../emotion/FontComponent';
 import { Button } from '../emotion/Component';
 import { css } from '@emotion/react';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 const Detail = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const info = location.state;
 
   const EditClick = () => {
     navigate('/upload');
@@ -30,8 +31,8 @@ const Detail = () => {
       <Header type="search" />
       <DocumentWrapper>
         <Section gap={2.4}>
-          <DocumentTitle title="title..." onClick={EditClick} />
-          <DocumentInfo comment={3} view={102} />
+          <DocumentTitle title={info.name} onClick={EditClick} />
+          <DocumentInfo comment={info.comment ? info.comment : 3} view={info.wikiPageHits} />
         </Section>
 
         {/* <Section>
@@ -39,11 +40,11 @@ const Detail = () => {
         </Section> */}
 
         <Section gap={8}>
-          <DocumentSection subTitle="소제목..." context="내용..." />
+          <DocumentSection subTitle={info.outline} context={info.explanation} />
         </Section>
 
         <Section>
-          <CommentBox comment={3}>
+          <CommentBox comment={info.comment ? info.comment : 3}>
             <Comment />
             <Comment />
             <Comment />

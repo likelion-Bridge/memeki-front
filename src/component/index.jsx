@@ -71,13 +71,11 @@ const Index = () => {
           >
             <Category type="popular" />
           </Header1>
-          <SelectBox type="date" />
+          {/* <SelectBox type="date" /> */}
         </TextBox>
         <MemeInfoBoxList>
           {wikiData ? (
-            wikiData.map((item) => (
-              <MemeInfoBox key={item.id} title={item.name} comment={0} view={0} link={item.link} />
-            )) // 데이터를 출력
+            wikiData.map((item) => <MemeInfoBox item={item} />) // 데이터를 출력
           ) : (
             <p>Loading...</p> // 데이터가 로드되는 동안 표시할 내용
           )}
