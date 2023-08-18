@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, DocumentWrapper, Header, Inner, SelectBox } from '../emotion/Component';
 import { css } from '@emotion/react';
 import { Body2Bold, Section } from '../emotion/FontComponent';
 import { MemeTitle, UploadMeme } from './Component';
 import theme from '../../styles/theme';
 import { useLocation, useNavigate } from 'react-router-dom';
+import selectOptions from '../store/SelectOptions';
 
 const Upload = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const info = location.state;
-  // console.log(info.outline);
+
+  const [countrySelectedOption, setCountrySelectedOption] = useState(selectOptions.country[0].name);
+  const [yearSelectedOption, setYearSelectedOption] = useState(selectOptions.year[0].name);
+
+  const CountrySelectClick = (optionName) => {
+    setCountrySelectedOption(optionName);
+  };
+  const YearSelectClick = (optionName) => {
+    setYearSelectedOption(optionName);
+  };
 
   const ButtonClick = () => {
     if (window.confirm('등록하시겠습니까?')) {
@@ -36,8 +46,16 @@ const Upload = () => {
           `}
         >
           <Body2Bold>카테고리 설정: </Body2Bold>
-          <SelectBox type="country" />
-          <SelectBox type="year" />
+          <SelectBox
+            selectClick={CountrySelectClick}
+            selectedOption={countrySelectedOption}
+            type="country"
+          />
+          <SelectBox
+            selectClick={YearSelectClick}
+            selectedOption={yearSelectedOption}
+            type="year"
+          />
         </Section>
 
         <DocumentWrapper>
@@ -46,14 +64,14 @@ const Upload = () => {
               align-items: center;
             `}
           >
-            <MemeTitle title={info.name} />
+            <MemeTitle title={info ? info.name : ''} />
           </Section>
           <Section
             style={css`
               align-items: flex-end;
             `}
           >
-            <UploadMeme outline={info.outline ? info.outline : ''}></UploadMeme>
+            <UploadMeme outline={info ? info.outline : ''}></UploadMeme>
             {/* <UploadMeme type="sub"></UploadMeme> */}
             <Button onClick={ButtonClick} />
           </Section>

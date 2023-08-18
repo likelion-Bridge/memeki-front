@@ -11,9 +11,15 @@ import {
 import { Header1, Section } from '../../emotion/FontComponent';
 import { css } from '@emotion/react';
 import axios from 'axios';
+import selectOptions from '../../store/SelectOptions';
 
 const Year = () => {
   const [wikiData, setWikiData] = useState(null);
+  const [yearSelectedOption, setYearSelectedOption] = useState(selectOptions.year[0].name);
+
+  const YearSelectClick = (optionName) => {
+    setYearSelectedOption(optionName);
+  };
 
   useEffect(() => {
     // 데이터를 가져오는 함수를 정의합니다.
@@ -41,7 +47,11 @@ const Year = () => {
           >
             <Category type="year" />
           </Header1>
-          <SelectBox type="year" />
+          <SelectBox
+            selectClick={YearSelectClick}
+            selectedOption={yearSelectedOption}
+            type="year"
+          />
         </TextBox>
         <MemeInfoBoxList>
           {wikiData ? (

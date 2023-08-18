@@ -11,9 +11,15 @@ import {
 } from '../../emotion/Component';
 import { Header1, Section } from '../../emotion/FontComponent';
 import { css } from '@emotion/react';
+import selectOptions from '../../store/SelectOptions';
 
 const Country = () => {
   const [wikiData, setWikiData] = useState(null);
+  const [countrySelectedOption, setCountrySelectedOption] = useState(selectOptions.country[0].name);
+
+  const CountrySelectClick = (optionName) => {
+    setCountrySelectedOption(optionName);
+  };
 
   useEffect(() => {
     // 데이터를 가져오는 함수를 정의합니다.
@@ -41,7 +47,11 @@ const Country = () => {
           >
             <Category type="country" />
           </Header1>
-          <SelectBox type="country" />
+          <SelectBox
+            selectClick={CountrySelectClick}
+            selectedOption={countrySelectedOption}
+            type="country"
+          />
         </TextBox>
         <MemeInfoBoxList>
           {wikiData ? (
