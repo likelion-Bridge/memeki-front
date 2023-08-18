@@ -6,7 +6,7 @@ import theme from '../../styles/theme';
 import { TextBox } from '../emotion/Component';
 
 // 제목을 보여주는 컴포넌트
-export const DocumentTitle = ({ title }) => {
+export const DocumentTitle = ({ title, onClick }) => {
   return (
     <TextBox
       style={css`
@@ -20,7 +20,15 @@ export const DocumentTitle = ({ title }) => {
           align-items: flex-end;
         `}
       >
-        <Body1Bold>[편집]</Body1Bold>
+        <div
+          onClick={onClick}
+          css={css`
+            ${theme.textVariants.body1Bold}
+            cursor: pointer;
+          `}
+        >
+          [편집]
+        </div>
       </div>
     </TextBox>
   );
@@ -105,32 +113,11 @@ export const DocumentSection = ({ subTitle, context }) => {
             align-items: center;
           `}
         >
-          <img src={process.env.PUBLIC_URL + '/images/selectIcon.png'} alt="icon" />
+          {/* <img src={process.env.PUBLIC_URL + '/images/selectIcon.png'} alt="icon" /> */}
         </div>
         <Header1>{subTitle}</Header1>
       </div>
       <Body1>{context}</Body1>
-    </div>
-  );
-};
-
-// 흰색 컴포넌트
-export const DocumentWrapper = ({ children }) => {
-  return (
-    <div
-      css={css`
-        width: 100%;
-        height: auto;
-        border-radius: 1.6rem;
-        padding: 8rem 4rem;
-        background-color: ${theme.palette.gray.white};
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8rem;
-      `}
-    >
-      {children}
     </div>
   );
 };
@@ -166,16 +153,22 @@ export const CommentBox = ({ comment, children }) => {
 };
 
 export const Comment = ({ type }) => {
-  const [isHidden, setIsHidden] = useState(false); // 상태 추가
+  const [isHidden, setIsHidden] = useState(false);
+  const [passwordInput, setPasswordInput] = useState(''); // State for password input
 
   const [name, setName] = useState('김재연'); // 초기값 설정
-  const [time, setTime] = useState('8시간 전'); // 초기값 설정
+  // const [time, setTime] = useState('8시간 전'); // 초기값 설정
 
   if (isHidden) {
     return null;
   }
   const handleDeleteClick = () => {
-    setIsHidden(true);
+    const password = prompt('비밀번호를 입력하세요:'); // Use prompt to get password input
+    if (password === '1234') {
+      setIsHidden(true);
+    } else {
+      alert('비밀번호가 일치하지 않습니다.');
+    }
   };
 
   if (type === 'reply') {
@@ -217,7 +210,8 @@ export const Comment = ({ type }) => {
                 margin-right: 0.8rem;
               `}
             ></img>
-            {name}&nbsp;&nbsp;·&nbsp;&nbsp;{time}
+            {name}
+            {/* &nbsp;&nbsp;·&nbsp;&nbsp;{time} */}
           </div>
           <div
             className="option"
@@ -280,7 +274,8 @@ export const Comment = ({ type }) => {
         `}
       >
         <div className="status">
-          {name}&nbsp;&nbsp;·&nbsp;&nbsp;{time}
+          {name}
+          {/* &nbsp;&nbsp;·&nbsp;&nbsp;{time} */}
         </div>
         <div
           className="option"

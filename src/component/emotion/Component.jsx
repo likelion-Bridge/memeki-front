@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { css } from '@emotion/react';
 import theme from '../../styles/theme';
 import { Body1Bold, Header1 } from './FontComponent';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 
 /**
  * 1200px의 Inner 컴포넌트, 가운데 정렬 처리 됨
@@ -32,6 +32,40 @@ export const Inner = ({ children, style }) => (
  * @param {string} type 헤더의 형태(main, search)
  */
 export const Header = ({ type }) => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const searchTerm = queryParams.get('term') || '';
+  const [scrollState, setScrollState] = useState(false);
+
+  const navigate = useNavigate(); // useNavigate 훅 사용
+
+  const [searchInput, setSearchInput] = useState(searchTerm);
+
+  const handleScroll = () => {
+    if (window.scrollY || document.documentElement.scrollTop > 0) {
+      setScrollState(true);
+    } else {
+      setScrollState(false);
+    }
+  };
+
+  const handleSearchChange = (event) => {
+    const newSearchTerm = event.target.value;
+    setSearchInput(newSearchTerm);
+  };
+
+  const handleSearchEnter = (event) => {
+    if (event.key === 'Enter') {
+      navigate(`/search?term=${searchInput}`); // useNavigate로 라우팅 처리
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   const styles = {
     main: {
       searchBar: css`
@@ -68,20 +102,25 @@ export const Header = ({ type }) => {
         padding: 2.4rem 0;
       `}
     >
-      <img
-        src={process.env.PUBLIC_URL + '/images/logo.png'}
-        alt="logo"
-        css={css`
-          width: 10rem;
-          height: 3rem;
-        `}
-      ></img>
+      <Link to="/">
+        <img
+          src={process.env.PUBLIC_URL + '/images/logo.png'}
+          alt="logo"
+          css={css`
+            width: 10rem;
+            height: 3rem;
+          `}
+        />
+      </Link>
       <div
         css={css`
           ${styles[type].searchBar}
         `}
       >
         <input
+          value={searchInput}
+          onChange={handleSearchChange}
+          onKeyPress={handleSearchEnter}
           type="text"
           placeholder="밈을 검색해보세요"
           css={css`
@@ -119,8 +158,15 @@ export const Header = ({ type }) => {
           ${styles[type].category};
         `}
       >
-        <li>홈</li>
-        <li>년도별</li>
+        <Link to="/">
+          <li>홈</li>
+        </Link>
+        <Link to="/year">
+          <li>년도별</li>
+        </Link>
+        <Link to="/country">
+          <li>국가별</li>
+        </Link>
         <Link to="/upload">
           <li>밈등록</li>
         </Link>
@@ -131,6 +177,24 @@ export const Header = ({ type }) => {
 
 // 검색 바 컴포넌트
 export const SearchBar = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const searchTerm = queryParams.get('term') || '';
+
+  const navigate = useNavigate(); // useNavigate 훅 사용
+
+  const [searchInput, setSearchInput] = useState(searchTerm);
+
+  const handleSearchChange = (event) => {
+    const newSearchTerm = event.target.value;
+    setSearchInput(newSearchTerm);
+  };
+
+  const handleSearchEnter = (event) => {
+    if (event.key === 'Enter') {
+      navigate(`/search?term=${searchInput}`); // useNavigate로 라우팅 처리
+    }
+  };
   return (
     <div
       css={css`
@@ -144,6 +208,9 @@ export const SearchBar = () => {
       `}
     >
       <input
+        value={searchInput}
+        onChange={handleSearchChange}
+        onKeyPress={handleSearchEnter}
         type="text"
         placeholder="밈을 검색해보세요."
         css={css`
@@ -224,12 +291,9 @@ export const SelectBox = ({ type }) => {
   return (
     <div
       css={css`
-        position: absolute;
-        right: 10%;
+        position: relative; /* 부모 요소의 위치 기준으로 */
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: flex-end;
         gap: 1.6rem;
         z-index: 10;
         ${styles[type]}
@@ -272,6 +336,8 @@ export const SelectBox = ({ type }) => {
       {isOpen && (
         <ul
           css={css`
+            position: absolute; /* 드롭다운 박스를 절대 위치로 설정 */
+            top: 100%; /* 부모 요소 아래에 배치 */
             width: inherit;
             border-radius: 0.5rem;
             background: ${theme.palette.gray.white};
@@ -321,12 +387,7 @@ export const TextBox = ({ children, style }) => (
 );
 
 // 썸네일이 보여지는 밈 문서
-export const MemeInfoBox = () => {
-  const [title, setTitle] = useState('제목');
-
-  const [comment, setComment] = useState('댓글');
-  const [view, setView] = useState('조회수');
-
+export const MemeInfoBox = ({ title, comment, view, link }) => {
   return (
     <div>
       <div
@@ -350,15 +411,31 @@ export const MemeInfoBox = () => {
             justify-content: center;
           `}
         >
-          <img
-            src={process.env.PUBLIC_URL + '/images/logo.png'}
-            alt="search"
-            css={css`
-              margin: 0.8rem 1.6rem;
-              width: 10rem;
-              height: 3rem;
-            `}
-          ></img>
+          {link ? (
+            <img
+              src={link}
+              alt={title + 'img'}
+              css={css`
+                /* margin: 0.8rem 1.6rem; */
+                height: inherit;
+                background-position: 50% 50%;
+                background-repeat: no-repeat;
+                &.contain {
+                  background-size: contain;
+                }
+              `}
+            />
+          ) : (
+            <img
+              src={process.env.PUBLIC_URL + '/images/logo.png'}
+              alt="search"
+              css={css`
+                margin: 0.8rem 1.6rem;
+                width: 10rem;
+                height: 3rem;
+              `}
+            />
+          )}
         </div>
         <div
           className="textbox"
@@ -396,40 +473,43 @@ export const MemeInfoBox = () => {
   );
 };
 
-export const Button = ({ type }) => {
+export const Button = ({ type, onClick }) => {
   if (type === 'new') {
     return (
-      <div
-        css={css`
-          display: flex;
-          padding: 10px 33px;
-          justify-content: center;
-          align-items: center;
-          width: 16.9rem;
-          height: 4.5rem;
-          color: ${theme.palette.gray[500]};
-          ${theme.textVariants.body1Bold};
-          background-color: ${theme.palette.primary[400]};
-          border-radius: 3rem;
-        `}
-      >
-        새 문서 만들기
-      </div>
+      <Link to="/upload">
+        <div
+          onClick={onClick}
+          css={css`
+            display: flex;
+            padding: 10px 33px;
+            justify-content: center;
+            align-items: center;
+            width: 16.9rem;
+            height: 4.5rem;
+            color: ${theme.palette.gray[500]};
+            ${theme.textVariants.body1Bold};
+            background-color: ${theme.palette.primary[400]};
+            border-radius: 3rem;
+          `}
+        >
+          새 문서 만들기
+        </div>
+      </Link>
     );
   } else {
     return (
       <div
+        onClick={onClick}
         css={css`
           display: flex;
-          padding: 10px 33px;
+          padding: 1rem 3rem;
           justify-content: center;
           align-items: center;
-          width: 9.9rem;
-          height: 4.5rem;
           color: ${theme.palette.gray[500]};
           ${theme.textVariants.body1Bold};
           background-color: ${theme.palette.primary[400]};
           border-radius: 3rem;
+          cursor: pointer;
         `}
       >
         등록
@@ -534,5 +614,26 @@ export const FindText = ({ count }) => {
       </span>
       의 문서를 찾았습니다.
     </Body1Bold>
+  );
+};
+
+// 흰색 컴포넌트
+export const DocumentWrapper = ({ children }) => {
+  return (
+    <div
+      css={css`
+        width: 100%;
+        height: auto;
+        border-radius: 1.6rem;
+        padding: 8rem 4rem;
+        background-color: ${theme.palette.gray.white};
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8rem;
+      `}
+    >
+      {children}
+    </div>
   );
 };

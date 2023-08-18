@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import {
   Header,
   Inner,
@@ -6,16 +7,30 @@ import {
   SelectBox,
   TextBox,
   MemeInfoBox,
-  UploadMeme,
   Category,
   MemeInfoBoxList,
 } from './emotion/Component';
 import { css } from '@emotion/react';
 import { Header1, Header2, Section, Title } from './emotion/FontComponent';
 import theme from '../styles/theme';
-import { Comment } from './detail/Component';
 
-const index = () => {
+const Index = () => {
+  const [wikiData, setWikiData] = useState(null);
+
+  useEffect(() => {
+    // 데이터를 가져오는 함수를 정의합니다.
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/api/wiki');
+        setWikiData(response.data); // 가져온 데이터를 상태에 저장
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData(); // 데이터를 가져오는 함수를 호출
+  }, []);
+
   return (
     <Inner style={css``}>
       <Header type="main" />
@@ -59,22 +74,17 @@ const index = () => {
           <SelectBox type="date" />
         </TextBox>
         <MemeInfoBoxList>
-          <MemeInfoBox />
-          <MemeInfoBox />
-          <MemeInfoBox />
-          <MemeInfoBox />
-          <MemeInfoBox />
-          <MemeInfoBox />
-          <MemeInfoBox />
-          <MemeInfoBox />
-          <MemeInfoBox />
-          <MemeInfoBox />
-          <MemeInfoBox />
-          <MemeInfoBox />
+          {wikiData ? (
+            wikiData.map((item) => (
+              <MemeInfoBox key={item.id} title={item.name} comment={0} view={0} link={item.link} />
+            )) // 데이터를 출력
+          ) : (
+            <p>Loading...</p> // 데이터가 로드되는 동안 표시할 내용
+          )}
         </MemeInfoBoxList>
       </Section>
     </Inner>
   );
 };
 
-export default index;
+export default Index;

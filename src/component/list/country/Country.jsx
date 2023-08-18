@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import {
   Category,
   Header,
@@ -12,6 +13,21 @@ import { Header1, Section } from '../../emotion/FontComponent';
 import { css } from '@emotion/react';
 
 const Country = () => {
+  const [wikiData, setWikiData] = useState(null);
+
+  useEffect(() => {
+    // 데이터를 가져오는 함수를 정의합니다.
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/api/wiki');
+        setWikiData(response.data); // 가져온 데이터를 상태에 저장
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData(); // 데이터를 가져오는 함수를 호출
+  }, []);
   return (
     <Inner>
       <Header type="search" />
@@ -28,18 +44,13 @@ const Country = () => {
           <SelectBox type="country" />
         </TextBox>
         <MemeInfoBoxList>
-          <MemeInfoBox />
-          <MemeInfoBox />
-          <MemeInfoBox />
-          <MemeInfoBox />
-          <MemeInfoBox />
-          <MemeInfoBox />
-          <MemeInfoBox />
-          <MemeInfoBox />
-          <MemeInfoBox />
-          <MemeInfoBox />
-          <MemeInfoBox />
-          <MemeInfoBox />
+          {wikiData ? (
+            wikiData.map((item) => (
+              <MemeInfoBox key={item.id} title={item.name} comment={0} view={0} link={item.link} />
+            )) // 데이터를 출력
+          ) : (
+            <p>Loading...</p> // 데이터가 로드되는 동안 표시할 내용
+          )}
         </MemeInfoBoxList>
       </Section>
     </Inner>
